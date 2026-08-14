@@ -142,6 +142,25 @@ function renderPhoto(photo, index) {
     <p class="photo-caption">${escapeHtml(photo.caption || "No caption yet")}</p>
   `;
 
+  // A photo with a note gets a fold that opens into the longer writing.
+  // Blank lines in the note become paragraph breaks.
+  if (photo.note) {
+    const fold = document.createElement("details");
+    fold.className = "photo-note";
+    const summary = document.createElement("summary");
+    summary.textContent = "— read the note";
+    fold.append(summary);
+    String(photo.note)
+      .trim()
+      .split(/\n\s*\n/)
+      .forEach((paragraph) => {
+        const p = document.createElement("p");
+        p.textContent = paragraph;
+        fold.append(p);
+      });
+    details.append(fold);
+  }
+
   entry.append(imageWrap, details);
   return entry;
 }

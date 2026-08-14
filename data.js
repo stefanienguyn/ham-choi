@@ -12,6 +12,10 @@
  *
  * A place can also have an optional icon, an emoji shown instead of the
  * usual dot:  icon: "🛵"
+ *
+ * A photo can also have an optional note — longer writing that unfolds
+ * below the caption. Wrap it in backticks (`) instead of quotes so it can
+ * run over many lines; a blank line starts a new paragraph.
  */
 const places = [
   {
@@ -25,7 +29,14 @@ const places = [
     coords: [35.0116, 135.7681],
     photos: [
       { src: "photos/kyoto-01.jpg", date: "2024-11-03", caption: "Fushimi Inari at 6am, empty" },
-      { src: "photos/kyoto-02.jpg", date: "2024-11-02", caption: "Rainy arrival" }
+      {
+        src: "photos/kyoto-02.jpg",
+        date: "2024-11-02",
+        caption: "Rainy arrival",
+        note: `This is a sample note so you can see how longer writing looks. It can run as long as you want.
+
+A blank line like the one above starts a new paragraph. Delete this whole place when you add your real photos.`
+      }
     ]
   },
   {
