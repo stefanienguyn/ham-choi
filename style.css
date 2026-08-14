@@ -237,6 +237,27 @@ button {
   box-shadow: 0 0 0 5px rgba(239, 105, 79, 0.24), 0 3px 10px rgba(21, 37, 37, 0.3);
 }
 
+/* Emoji markers (place.icon in data.js). The outer div is positioned by
+   Leaflet, so hover scaling happens on the inner span only. */
+.travel-marker-icon {
+  align-items: center;
+  display: flex;
+  font-size: 27px;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(21, 37, 37, 0.24);
+}
+
+.travel-marker-icon span {
+  display: block;
+  transition: transform 180ms ease;
+}
+
+.travel-marker-icon.is-hovered span {
+  transform: scale(1.28);
+}
+
 .leaflet-tooltip {
   background: var(--ink);
   border: 0;
@@ -609,6 +630,17 @@ button {
   font-family: var(--serif);
   font-size: 19px;
   margin-top: 35px;
+}
+
+.about-copy .signature a {
+  border-bottom: 1px solid var(--hairline-strong);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.about-copy .signature a:hover,
+.about-copy .signature a:focus-visible {
+  border-bottom-color: currentColor;
+  color: var(--accent);
 }
 
 .back-link {

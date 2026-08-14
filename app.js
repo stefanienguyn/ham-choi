@@ -231,15 +231,30 @@ function addMarkers() {
       weight: 0
     }).addTo(map);
 
-    const dot = L.circleMarker(place.coords, {
-      className: "travel-marker",
-      color: "#ffffff",
-      fillColor: "#ef694f",
-      fillOpacity: 1,
-      interactive: false,
-      radius: 8,
-      weight: 3
-    }).addTo(map);
+    // An optional place.icon (an emoji in data.js) replaces the dot for
+    // special places. The hover scale must target the inner span: Leaflet
+    // positions the outer element with its own transform, and scaling that
+    // would send the icon flying, like the old SVG-dot bug.
+    const dot = place.icon
+      ? L.marker(place.coords, {
+          icon: L.divIcon({
+            className: "travel-marker-icon",
+            html: `<span>${escapeHtml(place.icon)}</span>`,
+            iconAnchor: [17, 17],
+            iconSize: [34, 34]
+          }),
+          interactive: false,
+          keyboard: false
+        }).addTo(map)
+      : L.circleMarker(place.coords, {
+          className: "travel-marker",
+          color: "#ffffff",
+          fillColor: "#ef694f",
+          fillOpacity: 1,
+          interactive: false,
+          radius: 8,
+          weight: 3
+        }).addTo(map);
 
     hoverTarget.bindTooltip(place.name || "Unnamed place", { direction: "right", offset: [10, -14] });
     hoverTarget.on("mouseover", () => dot.getElement()?.classList.add("is-hovered"));

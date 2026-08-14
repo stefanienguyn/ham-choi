@@ -9,8 +9,17 @@
  * Photo dates must use YYYY-MM-DD so the map can sort them correctly.
  * Keep each image inside the photos/ folder, then use a path like:
  *   { src: "photos/my-photo.jpg", date: "2025-04-12", caption: "A note about it" }
+ *
+ * A place can also have an optional icon, an emoji shown instead of the
+ * usual dot:  icon: "🛵"
  */
 const places = [
+  {
+    name: "Home",
+    coords: [10.7769, 106.7009],
+    icon: "🛵",
+    photos: []
+  },
   {
     name: "Kyoto, Japan",
     coords: [35.0116, 135.7681],
