@@ -210,7 +210,14 @@ function moveLightbox(direction) {
 
 function addMarkers() {
   places.forEach((place, index) => {
-    if (!Array.isArray(place.coords) || place.coords.length < 2) return;
+    if (
+      !Array.isArray(place.coords) ||
+      place.coords.length < 2 ||
+      !Number.isFinite(Number(place.coords[0])) ||
+      !Number.isFinite(Number(place.coords[1]))
+    ) {
+      return;
+    }
 
     // Keep the interaction target a fixed size. The visible dot is a separate,
     // non-interactive layer so its hover animation cannot steal the pointer.
