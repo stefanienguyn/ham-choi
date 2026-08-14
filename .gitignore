@@ -51,3 +51,6 @@ Thumbs.db
 
 # Private local admin tool — never deploy
 admin.html
+
+# Local Claude Code settings
+.claude/
