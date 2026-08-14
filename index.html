@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A personal map of places, photographs, and small moments from the road." />
+    <title>Field Notes — Travel Photo Map</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3qA2A4hX0mL3h0Lw0Jqz0x0G1G1GQ=" crossorigin="" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="map-page">
+    <main id="map" aria-label="Interactive map of travel photographs"></main>
+
+    <nav class="corner-nav" aria-label="Site navigation">
+      <a class="wordmark" href="index.html" aria-label="Field Notes home">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span>Field Notes</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link is-current" href="index.html">Map</a>
+        <a class="nav-link" href="about.html">About</a>
+        <button class="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </nav>
+
+    <aside class="place-panel" aria-hidden="true" aria-labelledby="place-title">
+      <div class="panel-handle" aria-hidden="true"></div>
+      <div class="panel-inner">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow" id="place-meta">Travel notes</p>
+            <h1 id="place-title"></h1>
+            <p class="place-summary" id="place-summary"></p>
+          </div>
+          <button class="icon-button close-panel" type="button" aria-label="Close place panel">×</button>
+        </div>
+        <div class="photo-list" id="photo-list"></div>
+      </div>
+    </aside>
+
+    <div class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
+      <button class="lightbox-close icon-button" type="button" aria-label="Close photo">×</button>
+      <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous photo">←</button>
+      <div class="lightbox-content">
+        <div class="lightbox-image-wrap">
+          <img id="lightbox-image" src="" alt="" />
+          <div class="lightbox-missing" hidden>Photo not found<br /><span>Add the image to the photos folder.</span></div>
+        </div>
+        <div class="lightbox-caption">
+          <p id="lightbox-date"></p>
+          <h2 id="lightbox-caption"></h2>
+        </div>
+      </div>
+      <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next photo">→</button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

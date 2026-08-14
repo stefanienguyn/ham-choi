@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="About the person behind Field Notes." />
+    <title>About — Field Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="about-page">
+    <nav class="corner-nav" aria-label="Site navigation">
+      <a class="wordmark" href="index.html" aria-label="Field Notes home">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span>Field Notes</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">Map</a>
+        <a class="nav-link is-current" href="about.html">About</a>
+        <button class="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+          <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+        </button>
+      </div>
+    </nav>
+
+    <main class="about-content">
+      <p class="eyebrow">A map of the in-between</p>
+      <h1>Places I’ve been,<br /><em>things I noticed.</em></h1>
+      <div class="about-rule"></div>
+      <div class="about-grid">
+        <div class="portrait-frame" role="img" aria-label="Portrait placeholder">
+          <span>Portrait<br />goes here</span>
+        </div>
+        <div class="about-copy">
+          <p class="lead">This is a growing collection of photographs from the roads, train platforms, quiet cafés, and borrowed rooms that have stayed with me.</p>
+          <p>Every pin is a place I’ve passed through. Every photograph is a small attempt to remember what it felt like to be there — before the next train, the next morning, the next turn.</p>
+          <p class="signature">— Your name here</p>
+        </div>
+      </div>
+      <a class="back-link" href="index.html"><span aria-hidden="true">←</span> Return to the map</a>
+    </main>
+
+    <script>
+      // This visit-only theme toggle intentionally does not persist anything.
+      const themeToggle = document.querySelector(".theme-toggle");
+      let themeOverride = null;
+      themeToggle.addEventListener("click", () => {
+        themeOverride = themeOverride === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = themeOverride;
+        themeToggle.setAttribute("aria-label", `Use ${themeOverride === "dark" ? "light" : "dark"} colour theme`);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+Build a personal travel photo map website, plus a private local admin tool for
+managing its content. Build it in three stages and let me confirm each stage
+works before starting the next.
+
+=============================================================
+GLOBAL TECH CONSTRAINTS — these apply to every file
+=============================================================
+- Vanilla HTML, CSS, and JavaScript only. No React, no Vue, no framework.
+- No npm, no bundler, no build step. Every file must run by being opened
+  directly in a browser.
+- Leaflet 1.9.4 and exifr load from CDN via <script> tags.
+- No backend, no database, no server, no login, no localStorage.
+- Plain readable code with comments. I will be editing this by hand for years,
+  so favour obvious over clever.
+
+FILES:
+  index.html    the map (published)
+  about.html    about page (published)
+  style.css     shared styling (published)
+  data.js       all my content (published)
+  app.js        map logic (published)
+  photos/       my images (published)
+  admin.html    private content tool — NEVER published, never linked
+
+=============================================================
+STAGE 1 — THE MAP SITE
+=============================================================
+
+DATA FORMAT — use exactly this shape and do not restructure it:
+
+const places = [
+  {
+    name: "Kyoto, Japan",
+    coords: [35.0116, 135.7681],
+    photos: [
+      { src: "photos/kyoto-01.jpg", date: "2024-11-03", caption: "Fushimi Inari at 6am, empty" },
+      { src: "photos/kyoto-02.jpg", date: "2024-11-02", caption: "Rainy arrival" }
+    ]
+  }
+];
+
+Seed data.js with 3 example places on different continents using placeholder
+image paths. Add comments showing me how to add a new place by hand.
+
+MAP:
+- Light basemap: https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
+- Dark basemap:  https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png
+- Both URLs go in clearly-commented constants at the top of app.js.
+- Neither needs an API key. Do not add one.
+- maxZoom 19, minZoom 2. Opens on a whole-world view.
+- noWrap enabled so the world doesn't repeat sideways.
+- Attribution: © OpenStreetMap contributors, © CARTO.
+
+LIGHT / DARK MODE:
+- Follow prefers-color-scheme. The tile layer itself swaps between Positron and
+  Dark Matter — not just the UI chrome.
+- Small sun/moon toggle in the corner overrides it for the current visit only.
+- Marker, panel and lightbox colours all adapt to the active mode.
+
+MARKERS:
+- One L.circleMarker per place. One saturated accent colour that reads clearly
+  against pale grey — warm coral or strong teal. White border ring, soft shadow.
+- Grow slightly on hover via CSS transition. Tooltip shows the place name.
+- The active marker stays visibly highlighted while its panel is open.
+
+SIDE PANEL:
+- Clicking a marker slides a panel in from the right, about 420px wide.
+- Header: place name, photo count, and the date range of its photos.
+- Photos sorted NEWEST FIRST by date string.
+- Each photo shows the image, its date formatted as "3 November 2024", and its
+  caption underneath.
+- Closes via close button, Escape key, or clicking the map background.
+- Map pans so the active marker isn't hidden behind the panel.
+
+LIGHTBOX:
+- Clicking a photo opens it full-screen on a dimmed backdrop.
+- Left/right arrow keys and on-screen arrows move within that place's photos.
+- Escape closes. Caption and date remain visible underneath.
+
+MOBILE (under 768px):
+- Panel becomes a bottom sheet covering about 70% of the screen, with a drag
+  handle at the top.
+- Larger markers for touch targets.
+
+STYLING:
+- Clean and minimal to match the basemap. Generous whitespace, one modern sans
+  face throughout, restrained type scale. The photos supply all the colour.
+- Hairline borders rather than heavy boxes. Subtle shadows only.
+- Small corner nav linking between the map and About.
+
+ABOUT PAGE:
+- Simple centred column, same styling, placeholder text I'll replace, room for
+  one portrait photo, link back to the map.
+
+STAGE 1 BUGS TO AVOID:
+- #map needs an explicit height (100vh, not 100%) or Leaflet renders 0px tall.
+- image-orientation: from-image on photo CSS so phone photos aren't rotated.
+- loading="lazy" on every photo img — there will eventually be hundreds.
+- Alt text on every photo, taken from its caption.
+- Handle a place with zero photos without throwing.
+- When swapping tile layers for dark mode, REMOVE the old layer rather than
+  stacking a second one on top.
+
+=============================================================
+STAGE 2 — admin.html, THE PRIVATE TOOL
+=============================================================
+
+A standalone local page that turns raw phone photos into web-ready files plus a
+correctly formatted data.js. No backend. Never linked from the public pages.
+Put a comment at the top of the file reminding me not to deploy it.
+
+IMPORT PHOTOS:
+- Drag-and-drop zone accepting many images at once.
+- For each photo, read EXIF with exifr BEFORE any resizing, because resizing
+  strips metadata:
+    - DateTimeOriginal -> date, formatted YYYY-MM-DD
+    - GPS latitude and longitude if present
+- Group photos automatically by proximity: anything within ~25km becomes one
+  place, with an editable name field I fill in.
+- Photos without GPS go to an "unplaced" group where I enter coordinates myself.
+- Each photo shows as a thumbnail with its detected date and a caption box.
+
+EVERYTHING IS EDITABLE:
+- Every auto-detected value is a pre-filled editable field, never fixed:
+  date, latitude, longitude, place name, caption, output filename.
+- An edited field is visibly marked as changed, so I can tell at a glance what
+  was detected versus what I typed.
+- Drag thumbnails to reorder, overriding the newest-first default. My order wins
+  in the export if I change it.
+- Move photos between groups; merge and split groups.
+
+PROCESSING:
+- Default: resize to max 1600px on the long edge, JPEG quality 0.82, renamed
+  place-01.jpg, place-02.jpg etc. from the group name, lowercased and hyphenated.
+- Per-photo "keep original — don't resize" checkbox for photos I've already
+  edited elsewhere. When checked, pass the file through untouched except for
+  renaming.
+- A master toggle to set that for the whole batch at once.
+
+LIGHT IMAGE EDITING — keep it simple, no filters or colour tools:
+- Rotate 90° left/right, and flip.
+- Crop with presets: freeform, 1:1, 4:3, 3:2, 16:9.
+- Per-photo reset returning it to the original.
+- These affect the exported copy only. NEVER modify my source files.
+
+SAVING:
+- If the browser supports the File System Access API, offer "Choose photos
+  folder" and write finished files straight into it. Keep the handle for the
+  session so I only pick it once.
+- Otherwise fall back to downloading the batch.
+- Show clearly which of the two modes is active.
+
+WARN ME ABOUT:
+- Photos with no EXIF at all — likely stripped on export from another editor.
+  Say that plainly, and tell me date and location must be entered by hand.
+- Photos over 8MB where resizing is switched off.
+- HEIC files that may not decode — detect and tell me to convert first.
+
+STAGE 2 BUGS TO AVOID:
+- Resize by drawing through a canvas, which applies EXIF rotation automatically
+  so output is correctly oriented.
+- Revoke object URLs when thumbnails are removed, or a large batch leaks memory.
+
+=============================================================
+STAGE 3 — ROUND-TRIP EDITING IN admin.html
+=============================================================
+
+Let me load my existing content back in, edit it, and export the whole file.
+
+LOADING:
+- A "Load existing data.js" panel with two options: paste the file contents into
+  a textarea, or pick the file from disk.
+- Parse it tolerantly — it's a JS object literal with unquoted keys, not JSON.
+  Strip the `const places =` prefix and trailing semicolon, then evaluate it.
+  This is a local-only file holding my own data, so that is acceptable here.
+- On failure, tell me which line looks wrong instead of failing silently.
+- Populate the editor with every existing place and photo, in a section visually
+  distinct from newly imported ones.
+
+EDITING EXISTING CONTENT:
+- Edit any place name, coordinates, photo caption, date or order.
+- Delete individual photos, or whole places.
+- Drag a newly imported photo into an existing place so trips can be topped up.
+- If I've granted photos-folder access, show real thumbnails of existing photos.
+  Otherwise show the filename and a placeholder tile.
+
+ORPHAN CHECK:
+- With folder access granted, list any file in photos/ that no entry
