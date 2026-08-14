@@ -36,7 +36,16 @@ const placePanel = document.querySelector(".place-panel");
 const placeTitle = document.querySelector("#place-title");
 const placeMeta = document.querySelector("#place-meta");
 const placeSummary = document.querySelector("#place-summary");
-const photoList = document.querySelector("#photo-list");
+const photoStrip = document.querySelector("#photo-strip");
+const stripFooter = document.querySelector(".strip-footer");
+const stripCounter = document.querySelector("#strip-counter");
+const stripPrev = document.querySelector(".strip-prev");
+const stripNext = document.querySelector(".strip-next");
+const viewAllButton = document.querySelector(".view-all");
+const gallery = document.querySelector(".gallery");
+const galleryGrid = document.querySelector("#gallery-grid");
+const galleryTitle = document.querySelector("#gallery-title");
+const galleryMeta = document.querySelector("#gallery-meta");
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = document.querySelector("#lightbox-image");
 const lightboxMissing = document.querySelector(".lightbox-missing");
@@ -105,7 +114,8 @@ function panToMarker(marker) {
 function renderPhoto(photo, index) {
   const entry = document.createElement("article");
   entry.className = "photo-entry";
-  entry.style.setProperty("--photo-index", index);
+  // Cap the stagger so late photos in a big gallery don't wait seconds to appear.
+  entry.style.setProperty("--photo-index", Math.min(index, 8));
 
   const imageWrap = document.createElement("div");
   imageWrap.className = "photo-image-wrap";
@@ -158,20 +168,55 @@ function openPanel(place, index, marker) {
   placeTitle.textContent = place.name || "Unnamed place";
   placeMeta.textContent = `${activePhotos.length} ${activePhotos.length === 1 ? "photograph" : "photographs"}`;
   placeSummary.textContent = getDateRange(activePhotos);
-  photoList.replaceChildren();
+  photoStrip.replaceChildren();
 
   if (!activePhotos.length) {
     const emptyState = document.createElement("div");
     emptyState.className = "empty-state";
     emptyState.textContent = "No photographs have been added here yet.";
-    photoList.append(emptyState);
+    photoStrip.append(emptyState);
   } else {
-    activePhotos.forEach((photo, photoIndex) => photoList.append(renderPhoto(photo, photoIndex)));
+    activePhotos.forEach((photo, photoIndex) => photoStrip.append(renderPhoto(photo, photoIndex)));
   }
 
+  photoStrip.scrollTo({ left: 0 });
+  updateStrip();
   placePanel.classList.add("is-open");
   placePanel.setAttribute("aria-hidden", "false");
   panToMarker(marker);
+}
+
+function stripStep() {
+  // One slide's travel distance: a card plus the flex gap between cards.
+  const card = photoStrip.querySelector(".photo-entry");
+  const gap = parseFloat(getComputedStyle(photoStrip).columnGap) || 0;
+  return card ? card.offsetWidth + gap : photoStrip.clientWidth;
+}
+
+function updateStrip() {
+  const total = activePhotos.length;
+  const index = total ? Math.min(total - 1, Math.max(0, Math.round(photoStrip.scrollLeft / stripStep()))) : 0;
+  stripCounter.textContent = total ? `${index + 1} / ${total}` : "";
+  stripPrev.disabled = index <= 0;
+  stripNext.disabled = index >= total - 1;
+  stripFooter.hidden = total < 2;
+  viewAllButton.hidden = total < 2;
+}
+
+function openGallery() {
+  if (!activePhotos.length) return;
+
+  galleryTitle.textContent = activePlace?.name || "Unnamed place";
+  galleryMeta.textContent = `${activePhotos.length} ${activePhotos.length === 1 ? "photograph" : "photographs"} · ${getDateRange(activePhotos)}`;
+  galleryGrid.replaceChildren();
+  activePhotos.forEach((photo, photoIndex) => galleryGrid.append(renderPhoto(photo, photoIndex)));
+  gallery.classList.add("is-open");
+  gallery.setAttribute("aria-hidden", "false");
+}
+
+function closeGallery() {
+  gallery.classList.remove("is-open");
+  gallery.setAttribute("aria-hidden", "true");
 }
 
 function openLightbox(index) {
@@ -274,6 +319,12 @@ themeToggle.addEventListener("click", () => {
   swapTileLayer();
 });
 
+photoStrip.addEventListener("scroll", updateStrip, { passive: true });
+stripPrev.addEventListener("click", () => photoStrip.scrollBy({ left: -stripStep(), behavior: "smooth" }));
+stripNext.addEventListener("click", () => photoStrip.scrollBy({ left: stripStep(), behavior: "smooth" }));
+viewAllButton.addEventListener("click", openGallery);
+document.querySelector(".gallery-close").addEventListener("click", closeGallery);
+
 document.querySelector(".close-panel").addEventListener("click", closePanel);
 document.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
 document.querySelector(".lightbox-prev").addEventListener("click", () => moveLightbox(-1));
@@ -292,6 +343,7 @@ map.on("click", closePanel);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     if (lightbox.classList.contains("is-open")) closeLightbox();
+    else if (gallery.classList.contains("is-open")) closeGallery();
     else closePanel();
   }
   if (lightbox.classList.contains("is-open")) {
