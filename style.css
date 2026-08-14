@@ -1319,6 +1319,45 @@ button {
   max-width: 360px;
 }
 
+.place-search {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 8px;
+  max-width: 360px;
+}
+
+.place-search input {
+  background: var(--paper-soft);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  flex: 1;
+  font: inherit;
+  min-width: 0;
+  padding: 7px 9px;
+}
+
+.place-search-results {
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  margin: 0 0 14px;
+  max-width: 360px;
+}
+
+.place-search-result {
+  background: var(--paper-soft);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+  cursor: pointer;
+  padding: 7px 9px;
+  text-align: left;
+  transition: border-color 180ms ease;
+}
+
+.place-search-result:hover {
+  border-color: var(--accent-deep);
+}
+
 .field {
   color: var(--muted);
   display: block;

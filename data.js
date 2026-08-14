@@ -1,22 +1,19 @@
 /*
  * This is the only content file you need to edit for the public map.
  *
- * To add a new place, copy one of the objects below and change:
- *   - name: the place shown in the panel and map tooltip
- *   - coords: [latitude, longitude]
- *   - photos: one or more photo objects
- *
+ * Each place has a name, coords [latitude, longitude], and photos.
  * Photo dates must use YYYY-MM-DD so the map can sort them correctly.
- * Keep each image inside the photos/ folder, then use a path like:
- *   { src: "photos/my-photo.jpg", date: "2025-04-12", caption: "A note about it" }
  *
- * A place can also have an optional icon, an emoji shown instead of the
- * usual dot:  icon: "🛵"
+ * A place can also have an optional icon, an emoji shown instead of
+ * the usual dot:  icon: "🛵"
  *
- * A photo can also have an optional note — longer writing that opens on
- * its own full-window reading page. Wrap it in backticks (`) instead of
- * quotes so it can run over many lines; a blank line starts a new
- * paragraph.
+ * A photo can also have an optional note — longer writing that opens
+ * on its own full-window reading page. Wrap it in backticks (`)
+ * instead of quotes; a blank line starts a new paragraph.
+ *
+ * A photo can also have an optional spot — the exact [latitude, longitude]
+ * where it was taken. The map doesn't use it yet; it's kept so photos can
+ * be placed precisely later.
  */
 const places = [
   {
@@ -26,33 +23,10 @@ const places = [
     photos: []
   },
   {
-    name: "Kyoto, Japan",
-    coords: [35.0116, 135.7681],
+    name: "Dinh Độc Lập, Sài Gòn",
+    coords: [10.7737261, 106.7166008],
     photos: [
-      { src: "photos/kyoto-01.jpg", date: "2024-11-03", caption: "Fushimi Inari at 6am, empty" },
-      {
-        src: "photos/kyoto-02.jpg",
-        date: "2024-11-02",
-        caption: "Rainy arrival",
-        note: `This is a sample note so you can see how longer writing looks. It can run as long as you want.
-
-A blank line like the one above starts a new paragraph. Delete this whole place when you add your real photos.`
-      }
-    ]
-  },
-  {
-    name: "Lisbon, Portugal",
-    coords: [38.7223, -9.1393],
-    photos: [
-      { src: "photos/lisbon-01.jpg", date: "2023-06-18", caption: "Light on the tiled walls" },
-      { src: "photos/lisbon-02.jpg", date: "2023-06-16", caption: "The long way down to the river" }
-    ]
-  },
-  {
-    name: "Valparaíso, Chile",
-    coords: [-33.0472, -71.6127],
-    photos: [
-      { src: "photos/valparaiso-01.jpg", date: "2022-02-09", caption: "Blue hour above the port" }
+      { src: "photos/dinh1.jpg", date: "2023-10-01", caption: "Dinh with mẹ iu Kim Uyên", spot: [10.7775844066757, 106.69534501099479] }
     ]
   }
 ];
