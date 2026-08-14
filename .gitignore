@@ -47,3 +47,7 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+.agents/
+
+# Private local admin tool — never deploy
+admin.html
