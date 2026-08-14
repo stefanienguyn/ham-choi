@@ -42,6 +42,11 @@ const stripCounter = document.querySelector("#strip-counter");
 const stripPrev = document.querySelector(".strip-prev");
 const stripNext = document.querySelector(".strip-next");
 const viewAllButton = document.querySelector(".view-all");
+const noteView = document.querySelector(".note-view");
+const noteImage = document.querySelector("#note-image");
+const noteDate = document.querySelector("#note-date");
+const noteTitle = document.querySelector("#note-title");
+const noteBody = document.querySelector("#note-body");
 const gallery = document.querySelector(".gallery");
 const galleryGrid = document.querySelector("#gallery-grid");
 const galleryTitle = document.querySelector("#gallery-title");
@@ -142,23 +147,14 @@ function renderPhoto(photo, index) {
     <p class="photo-caption">${escapeHtml(photo.caption || "No caption yet")}</p>
   `;
 
-  // A photo with a note gets a fold that opens into the longer writing.
-  // Blank lines in the note become paragraph breaks.
+  // A photo with a note gets a link that opens the full-window reading page.
   if (photo.note) {
-    const fold = document.createElement("details");
-    fold.className = "photo-note";
-    const summary = document.createElement("summary");
-    summary.textContent = "— read the note";
-    fold.append(summary);
-    String(photo.note)
-      .trim()
-      .split(/\n\s*\n/)
-      .forEach((paragraph) => {
-        const p = document.createElement("p");
-        p.textContent = paragraph;
-        fold.append(p);
-      });
-    details.append(fold);
+    const noteLink = document.createElement("button");
+    noteLink.type = "button";
+    noteLink.className = "note-link";
+    noteLink.textContent = "— read the note";
+    noteLink.addEventListener("click", () => openNote(photo));
+    details.append(noteLink);
   }
 
   entry.append(imageWrap, details);
@@ -236,6 +232,31 @@ function openGallery() {
 function closeGallery() {
   gallery.classList.remove("is-open");
   gallery.setAttribute("aria-hidden", "true");
+}
+
+function openNote(photo) {
+  noteImage.src = photo.src || "";
+  noteImage.alt = photo.caption || "Travel photograph";
+  noteDate.textContent = [formatDate(photo.date), activePlace?.name].filter(Boolean).join(" · ");
+  noteTitle.textContent = photo.caption || "Untitled";
+  noteBody.replaceChildren();
+  // Blank lines in the note become paragraph breaks.
+  String(photo.note || "")
+    .trim()
+    .split(/\n\s*\n/)
+    .forEach((paragraph) => {
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+      noteBody.append(p);
+    });
+  noteView.scrollTo({ top: 0 });
+  noteView.classList.add("is-open");
+  noteView.setAttribute("aria-hidden", "false");
+}
+
+function closeNote() {
+  noteView.classList.remove("is-open");
+  noteView.setAttribute("aria-hidden", "true");
 }
 
 function openLightbox(index) {
@@ -343,6 +364,7 @@ stripPrev.addEventListener("click", () => photoStrip.scrollBy({ left: -stripStep
 stripNext.addEventListener("click", () => photoStrip.scrollBy({ left: stripStep(), behavior: "smooth" }));
 viewAllButton.addEventListener("click", openGallery);
 document.querySelector(".gallery-close").addEventListener("click", closeGallery);
+document.querySelector(".note-close").addEventListener("click", closeNote);
 
 document.querySelector(".close-panel").addEventListener("click", closePanel);
 document.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
@@ -362,6 +384,7 @@ map.on("click", closePanel);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     if (lightbox.classList.contains("is-open")) closeLightbox();
+    else if (noteView.classList.contains("is-open")) closeNote();
     else if (gallery.classList.contains("is-open")) closeGallery();
     else closePanel();
   }

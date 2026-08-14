@@ -505,41 +505,77 @@ button {
   margin: 0;
 }
 
-.photo-note {
-  margin-top: 8px;
-}
-
-.photo-note summary {
+.note-link {
+  background: transparent;
   color: var(--accent-deep);
-  cursor: pointer;
+  display: block;
   font-family: var(--serif);
   font-size: 14px;
   font-style: italic;
-  list-style: none;
-  width: fit-content;
+  margin-top: 8px;
+  padding: 0;
+  text-align: left;
+  transition: color 180ms ease;
 }
 
-.photo-note summary::-webkit-details-marker {
-  display: none;
+.note-link:hover {
+  color: var(--accent);
 }
 
-.photo-note summary::after {
-  content: " ▾";
-  font-style: normal;
+.note-view {
+  background: var(--paper);
+  inset: 0;
+  opacity: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 220ms ease;
+  z-index: 950;
 }
 
-.photo-note[open] summary::after {
-  content: " ▴";
+.note-view.is-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.photo-note p {
-  border-left: 1px solid var(--hairline-strong);
+.note-inner {
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 56px clamp(20px, 5vw, 40px) 90px;
+}
+
+.note-close {
+  position: fixed;
+  right: 20px;
+  top: 16px;
+}
+
+.note-photo {
+  margin: 0 0 30px;
+}
+
+.note-photo img {
+  display: block;
+  image-orientation: from-image;
+  margin: 0 auto;
+  max-height: 72vh;
+  max-width: 100%;
+}
+
+.note-view h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.4vw, 32px);
+  font-weight: 400;
+  margin: 4px 0 22px;
+}
+
+.note-body p {
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.65;
-  margin: 10px 0 0;
-  padding-left: 12px;
+  font-size: 17px;
+  line-height: 1.75;
+  margin: 0 0 1.2em;
 }
 
 .empty-state {

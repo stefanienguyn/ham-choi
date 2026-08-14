@@ -13,9 +13,10 @@
  * A place can also have an optional icon, an emoji shown instead of the
  * usual dot:  icon: "🛵"
  *
- * A photo can also have an optional note — longer writing that unfolds
- * below the caption. Wrap it in backticks (`) instead of quotes so it can
- * run over many lines; a blank line starts a new paragraph.
+ * A photo can also have an optional note — longer writing that opens on
+ * its own full-window reading page. Wrap it in backticks (`) instead of
+ * quotes so it can run over many lines; a blank line starts a new
+ * paragraph.
  */
 const places = [
   {
