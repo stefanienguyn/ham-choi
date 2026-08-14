@@ -10,21 +10,19 @@
  * A photo can also have an optional note — longer writing that opens
  * on its own full-window reading page. Wrap it in backticks (`)
  * instead of quotes; a blank line starts a new paragraph.
- *
- * A photo can also have an optional spot — the exact [latitude, longitude]
- * where it was taken. The map doesn't use it yet; it's kept so photos can
- * be placed precisely later.
  */
 const places = [
   {
-    name: "Home",
-    coords: [10.7769, 106.7009],
-    icon: "🛵",
-    photos: []
+    name: "Wilbraham, MA",
+    coords: [42.1223378, -72.4313151],
+    photos: [
+      { src: "photos/wma1.jpg", date: "2025-05-20", caption: "", spot: [42.1223378, -72.4313151] }
+    ]
   },
   {
-    name: "Dinh Độc Lập, Sài Gòn",
-    coords: [10.7737261, 106.7166008],
+    name: "Home",
+    icon: "🛵",
+    coords: [10.7769, 106.7009],
     photos: [
       { src: "photos/dinh1.jpg", date: "2023-10-01", caption: "Dinh with mẹ iu Kim Uyên", spot: [10.7775844066757, 106.69534501099479] }
     ]

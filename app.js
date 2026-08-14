@@ -144,7 +144,7 @@ function renderPhoto(photo, index) {
   details.className = "photo-details";
   details.innerHTML = `
     <p class="photo-date">${formatDate(photo.date)}</p>
-    <p class="photo-caption">${escapeHtml(photo.caption || "No caption yet")}</p>
+    ${photo.caption ? `<p class="photo-caption">${escapeHtml(photo.caption)}</p>` : ""}
   `;
 
   // A photo with a note gets a link that opens the full-window reading page.
@@ -269,7 +269,7 @@ function openLightbox(index) {
   lightboxImage.src = photo.src || "";
   lightboxImage.alt = photo.caption || `Travel photograph ${activePhotoIndex + 1}`;
   lightboxDate.textContent = formatDate(photo.date);
-  lightboxCaption.textContent = photo.caption || "No caption yet";
+  lightboxCaption.textContent = photo.caption || "";
   lightbox.classList.add("is-open");
   lightbox.setAttribute("aria-hidden", "false");
   document.body.classList.add("lightbox-open");

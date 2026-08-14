@@ -1280,17 +1280,30 @@ button {
 .group-title-input {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px dashed var(--hairline-strong);
   color: var(--ink);
+  cursor: text;
   font-family: var(--serif);
   font-size: 25px;
   outline: 0;
   padding: 0 0 5px;
+  transition: border-color 180ms ease;
   width: 100%;
 }
 
+.group-title-input:hover {
+  border-bottom-color: var(--accent-deep);
+}
+
 .group-title-input:focus {
-  border-color: var(--accent);
+  border-bottom-color: var(--accent);
+  border-bottom-style: solid;
+}
+
+.rename-hint {
+  color: var(--accent-deep);
+  font-size: 12px;
+  margin: 8px 0 0;
 }
 
 .group-actions {
