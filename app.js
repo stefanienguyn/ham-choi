@@ -4,13 +4,14 @@
  * The two tile URLs are intentionally kept here, near the top, so they are
  * easy to change later. They do not require an API key.
  */
-const LIGHT_TILES = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-const DARK_TILES = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+const LIGHT_TILES = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png";
+const DARK_TILES = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png";
 const TILE_OPTIONS = {
   attribution: "&copy; OpenStreetMap contributors, &copy; CARTO",
   maxZoom: 19,
   minZoom: 2,
-  noWrap: true
+  noWrap: true,
+  subdomains: "abcd"
 };
 
 const map = L.map("map", {
