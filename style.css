@@ -30,20 +30,6 @@
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper: #1c2424;
-    --paper-soft: #222c2b;
-    --ink: #e9ece7;
-    --muted: #a2aeaa;
-    --hairline: rgba(233, 236, 231, 0.15);
-    --hairline-strong: rgba(233, 236, 231, 0.3);
-    --panel: rgba(28, 36, 36, 0.97);
-    --shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -192,18 +178,6 @@ button {
   transform: translateY(10px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-icon-sun {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  :root:not([data-theme="light"]) .theme-icon-moon {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 :root[data-theme="dark"] .theme-icon-sun {
   opacity: 0;
   transform: translateY(-10px);
@@ -220,8 +194,12 @@ button {
 }
 
 .leaflet-container {
-  background: var(--paper);
+  background-color: #e6e6e6;
   font-family: var(--sans);
+}
+
+:root[data-theme="dark"] .leaflet-container {
+  background-color: #242b2b;
 }
 
 .leaflet-control-attribution {
@@ -239,12 +217,17 @@ button {
   border: 3px solid #fff;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(21, 37, 37, 0.24);
-  transition: transform 180ms ease, background 180ms ease;
+  pointer-events: none;
+  transition: transform 180ms ease, fill 180ms ease;
 }
 
-.travel-marker:hover,
+.travel-marker-target {
+  pointer-events: all;
+}
+
+.travel-marker.is-hovered,
 .travel-marker.is-active {
-  background: var(--accent-deep);
+  fill: var(--accent-deep);
   transform: scale(1.28);
 }
 
@@ -260,6 +243,7 @@ button {
   color: var(--paper);
   font-size: 12px;
   padding: 6px 8px;
+  pointer-events: none;
 }
 
 .leaflet-tooltip::before {

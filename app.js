@@ -10,15 +10,15 @@ const TILE_OPTIONS = {
   attribution: "&copy; OpenStreetMap contributors, &copy; CARTO",
   maxZoom: 19,
   minZoom: 2,
-  noWrap: true,
   subdomains: "abcd"
 };
 
 const map = L.map("map", {
-  maxBounds: [[-85, -180], [85, 180]],
-  maxBoundsViscosity: 0.9,
+  // Latitude-only bounds preserve the horizontal repetition of the world.
+  maxBounds: [[-85, -Infinity], [85, Infinity]],
+  maxBoundsViscosity: 1.0,
   minZoom: 2,
-  worldCopyJump: false,
+  worldCopyJump: true,
   zoomControl: false
 }).setView([20, 0], 2);
 
@@ -44,12 +44,8 @@ const lightboxDate = document.querySelector("#lightbox-date");
 const lightboxCaption = document.querySelector("#lightbox-caption");
 const themeToggle = document.querySelector(".theme-toggle");
 
-function systemPrefersDark() {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
-}
-
 function activeThemeIsDark() {
-  return themeOverride ? themeOverride === "dark" : systemPrefersDark();
+  return themeOverride === "dark";
 }
 
 function swapTileLayer() {
@@ -94,7 +90,7 @@ function closePanel() {
   placePanel.classList.remove("is-open");
   placePanel.setAttribute("aria-hidden", "true");
   if (activePlaceIndex >= 0 && markerLayers[activePlaceIndex]) {
-    markerLayers[activePlaceIndex].getElement()?.classList.remove("is-active");
+    markerLayers[activePlaceIndex].dot.getElement()?.classList.remove("is-active");
   }
   activePlaceIndex = -1;
   activePlace = null;
@@ -151,7 +147,7 @@ function escapeHtml(value) {
 
 function openPanel(place, index, marker) {
   if (activePlaceIndex >= 0 && markerLayers[activePlaceIndex]) {
-    markerLayers[activePlaceIndex].getElement()?.classList.remove("is-active");
+    markerLayers[activePlaceIndex].dot.getElement()?.classList.remove("is-active");
   }
 
   activePlace = place;
@@ -216,21 +212,36 @@ function addMarkers() {
   places.forEach((place, index) => {
     if (!Array.isArray(place.coords) || place.coords.length < 2) return;
 
-    const marker = L.circleMarker(place.coords, {
+    // Keep the interaction target a fixed size. The visible dot is a separate,
+    // non-interactive layer so its hover animation cannot steal the pointer.
+    const hoverTarget = L.circleMarker(place.coords, {
+      className: "travel-marker-target",
+      color: "transparent",
+      fillColor: "transparent",
+      fillOpacity: 0,
+      opacity: 0,
+      radius: 18,
+      weight: 0
+    }).addTo(map);
+
+    const dot = L.circleMarker(place.coords, {
       className: "travel-marker",
       color: "#ffffff",
       fillColor: "#ef694f",
       fillOpacity: 1,
+      interactive: false,
       radius: 8,
       weight: 3
     }).addTo(map);
 
-    marker.bindTooltip(place.name || "Unnamed place", { direction: "right", offset: [10, 0] });
-    marker.on("click", (event) => {
+    hoverTarget.bindTooltip(place.name || "Unnamed place", { direction: "right", offset: [10, -14] });
+    hoverTarget.on("mouseover", () => dot.getElement()?.classList.add("is-hovered"));
+    hoverTarget.on("mouseout", () => dot.getElement()?.classList.remove("is-hovered"));
+    hoverTarget.on("click", (event) => {
       L.DomEvent.stopPropagation(event);
-      openPanel(place, index, marker);
+      openPanel(place, index, hoverTarget);
     });
-    markerLayers[index] = marker;
+    markerLayers[index] = { target: hoverTarget, dot };
   });
 }
 
@@ -265,10 +276,6 @@ document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") moveLightbox(-1);
     if (event.key === "ArrowRight") moveLightbox(1);
   }
-});
-
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-  if (!themeOverride) swapTileLayer();
 });
 
 swapTileLayer();
