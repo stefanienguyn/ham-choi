@@ -867,12 +867,12 @@ button {
   margin: 0 0 22px;
 }
 
-.about-greeting {
+.about-copy .about-greeting {
   color: var(--accent-deep);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  margin: 0 0 14px;
+  margin: 0 0 6px;
   text-transform: uppercase;
 }
 
