@@ -225,6 +225,11 @@ button {
   pointer-events: all;
 }
 
+/* No focus ring after a mouse click; keyboard focus keeps its outline. */
+.leaflet-interactive:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .travel-marker.is-hovered,
 .travel-marker.is-active {
   fill: var(--accent-deep);

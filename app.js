@@ -249,7 +249,9 @@ function renderDaySection(day, startIndex) {
       return card ? card.offsetWidth + gap : strip.clientWidth;
     };
     const update = () => {
-      const position = Math.min(day.photos.length - 1, Math.max(0, Math.round(strip.scrollLeft / step())));
+      // step() is 0 while the strip is still detached from the page.
+      const size = step();
+      const position = size > 0 ? Math.min(day.photos.length - 1, Math.max(0, Math.round(strip.scrollLeft / size))) : 0;
       counter.textContent = `${position + 1} / ${day.photos.length}`;
       prev.disabled = position <= 0;
       next.disabled = position >= day.photos.length - 1;
