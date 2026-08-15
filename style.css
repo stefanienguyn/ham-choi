@@ -212,6 +212,23 @@ button {
   color: var(--muted);
 }
 
+.map-hint {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  bottom: 18px;
+  box-shadow: var(--shadow);
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  left: 18px;
+  margin: 0;
+  max-width: 300px;
+  padding: 10px 14px;
+  position: fixed;
+  z-index: 700;
+}
+
 .travel-marker {
   background: var(--accent);
   border: 3px solid #fff;
