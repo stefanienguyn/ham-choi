@@ -15,20 +15,42 @@
  */
 const places = [
   {
-    name: "New York City, NY",
-    coords: [40.7127281, -74.0060152],
-    photos: [
-      { src: "photos/new-york-city-ny-2026-03-30-01.jpg", date: "2026-03-30", caption: "the trio", spot: [40.7127281, -74.0060152] },
-      { src: "photos/new-york-city-ny-undated-01.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] },
-      { src: "photos/new-york-city-ny-undated-02.jpg", date: "2026-03-30", caption: "minions", spot: [40.7127281, -74.0060152] },
-      { src: "photos/new-york-city-ny-2026-03-30-02.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] }
-    ]
-  },
-  {
     name: "Home",
     icon: "🛵",
     coords: [10.7737261, 106.7166008],
     photos: [
+      { src: "photos/home-2026-06-07-01.jpg", date: "2026-06-07", caption: "tình yêu tới rồi, bạch nguyệt quang về rồi", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-07-02.jpg", date: "2026-06-07", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-07-03.jpg", date: "2026-06-07", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-16-01.jpg", date: "2026-06-16", caption: "lên cầu Ba Son hóng gió", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-16-02.jpg", date: "2026-06-16", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-17-01.jpg", date: "2026-06-17", caption: "a di đà phật", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-17-02.jpg", date: "2026-06-17", caption: "bạch nguyệt quang xinh qá cháy mẹ hình", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-17-03.jpg", date: "2026-06-17", caption: "chú khỉ buồn ở lại mạnh giỏi", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-17-04.jpg", date: "2026-06-17", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-08-01.jpg", date: "2026-06-08", caption: "mãi mới đc 1 hôm ở nhà", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-08-02.jpg", date: "2026-06-08", caption: "Dì Út", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-08-03.jpg", date: "2026-06-08", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-12-01.jpg", date: "2026-01-12", caption: "anh bác suỹ chị nhà giéo", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-05-01.jpg", date: "2026-06-05", caption: "trẻ trâu", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-05-02.jpg", date: "2026-06-05", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-04-01.jpg", date: "2026-06-04", caption: "Vừa về vn là phóng xe ra đường ", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-04-02.jpg", date: "2026-06-04", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-04-03.jpg", date: "2026-06-04", caption: "tét camera cho mẹ iu", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-1899-11-30-01.jpg", date: "2025-07-05", caption: "cà phê gần bưu điện tp", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-1899-11-30-02.jpg", date: "2025-07-05", caption: "giống dưới âm phủ v", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-10-03.jpg", date: "2025-07-10", caption: "bánh mì chẻo Đặng Trân Côn", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-10-01.jpg", date: "2025-07-10", caption: "Dookki", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-10-02.jpg", date: "2025-07-10", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-12-15-01.jpg", date: "2025-12-15", caption: "Chô li bi", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-12-20-01.jpg", date: "2025-12-20", caption: "Ông địa + ông thần tài", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-12-20-02.jpg", date: "2025-12-20", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-12-20-03.jpg", date: "2025-12-20", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-20-03.jpg", date: "2025-07-20", caption: "Chè bưởi ngon vcl", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-20-04.jpg", date: "2025-07-20", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-06-03-01.jpg", date: "2025-06-03", caption: "cốt 10 năm", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-06-03-02.jpg", date: "2025-06-03", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-17-01.jpg", date: "2026-01-17", caption: "Last night in VN for winter break 2025", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-01-07-01.jpg", date: "2026-01-07", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-01-07-02.jpg", date: "2026-01-07", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2025-07-25-01.jpg", date: "2025-07-25", caption: "Đi coi tarot cho thầy Trí :v", spot: [10.7737261, 106.7166008] },
@@ -49,16 +71,94 @@ const places = [
     ]
   },
   {
+    name: "Phan Thiết, Vietnam",
+    coords: [10.9028645, 108.0632846],
+    photos: [
+      { src: "photos/phan-thiet-vietnam-2025-06-30-01.jpg", date: "2025-06-30", caption: "Phan thiết with Toán 2124", spot: [10.9028645, 108.0632846] }
+    ]
+  },
+  {
+    name: "Wilbraham, MA",
+    coords: [42.1223378, -72.4313151],
+    photos: [
+      { src: "photos/wilbraham-ma-2026-05-20-01.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2026-05-20-02.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2026-05-20-03.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2026-05-20-05.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2026-05-20-06.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2026-05-20-07.jpg", date: "2026-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-2025-06-13-01.jpg", date: "2025-05-21", caption: "College Day", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-02.jpg", date: "2025-05-20", caption: "Senior Trip", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wma1.jpg", date: "2025-05-20", caption: "", spot: [42.1223378, -72.4313151] },
+      { src: "photos/wilbraham-ma-01.jpg", date: "2025-05-17", caption: "Rugby senior game", spot: [42.1223378, -72.4313151] }
+    ]
+  },
+  {
+    name: "New York City, NY",
+    coords: [40.7127281, -74.0060152],
+    photos: [
+      { src: "photos/new-york-city-ny-2026-08-04-01.jpg", date: "2026-08-04", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-08-04-02.jpg", date: "2026-08-04", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-08-04-03.jpg", date: "2026-08-04", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-08-04-05.jpg", date: "2026-08-04", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-08-04-06.jpg", date: "2026-08-04", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-03-30-01.jpg", date: "2026-03-30", caption: "the trio", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-undated-01.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-undated-02.jpg", date: "2026-03-30", caption: "minions", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-03-30-02.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] }
+    ]
+  },
+  {
     name: "Claremont, CA",
     coords: [34.0966764, -117.7197785],
     photos: [
       { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "see u soon too c Nhi !", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+    ]
+  },
+  {
+    name: "Vũng Tàu, Vietnam",
+    coords: [10.348189, 107.0753349],
+    photos: [
+      { src: "photos/vung-tau-vietnam-2026-06-13-02.jpg", date: "2026-06-13", caption: "3 đứa con", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-13-03.jpg", date: "2026-06-13", caption: "ba mẹ", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-11-01.jpg", date: "2026-06-11", caption: "bụng k đáy", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-11-02.jpg", date: "2026-06-11", caption: "", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-11-03.jpg", date: "2026-06-11", caption: "đi mua sushi burrito", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-10-01.jpg", date: "2026-06-11", caption: "", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-10-02.jpg", date: "2026-06-11", caption: "", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-13-01.jpg", date: "2026-06-13", caption: "20 bday", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-12-01.jpg", date: "2026-06-12", caption: "ba mẹ iu", spot: [10.348189, 107.0753349] },
+      { src: "photos/vung-tau-vietnam-2026-06-12-02.jpg", date: "2026-06-12", caption: "chồng gét vợ lây", spot: [10.348189, 107.0753349] }
+    ]
+  },
+  {
+    name: "Hà Nội, Vietnam",
+    coords: [21.0283334, 105.854041],
+    photos: [
+      { src: "photos/ha-noi-vietnam-2026-01-03-01.jpg", date: "2026-01-03", caption: "Tạo cái dáng mẹ jztr", spot: [21.0283334, 105.854041] },
+      { src: "photos/ha-noi-vietnam-2026-01-03-02.jpg", date: "2026-01-03", caption: "", spot: [21.0283334, 105.854041] }
+    ]
+  },
+  {
+    name: "Đà Nẵng, Vietnam",
+    coords: [16.068501, 108.2240242],
+    photos: [
+      { src: "photos/a-nang-vietnam-2025-06-23-01.jpg", date: "2025-06-23", caption: "i miss ashley in vietnam :(", spot: [16.068501, 108.2240242] }
+    ]
+  },
+  {
+    name: "Hội An, Vietnam",
+    coords: [15.8880397, 108.3367883],
+    photos: [
+      { src: "photos/hoi-an-vietnam-2025-06-23-01.jpg", date: "2025-06-23", caption: "i blacked out after this...", spot: [15.8880397, 108.3367883] },
+      { src: "photos/hoi-an-vietnam-2025-06-23-02.jpg", date: "2025-06-23", caption: "", spot: [15.8880397, 108.3367883] }
     ]
   },
   {
@@ -99,16 +199,6 @@ const places = [
     photos: [
       { src: "photos/a-lat-vietnam-2025-07-20-01.jpg", date: "2025-07-20", caption: "Cà phê Linh", spot: [11.9082632, 108.4572089] },
       { src: "photos/a-lat-vietnam-2025-07-20-02.jpg", date: "2025-07-20", caption: "bà già quìn", spot: [11.9082632, 108.4572089] }
-    ]
-  },
-  {
-    name: "Wilbraham, MA",
-    coords: [42.1223378, -72.4313151],
-    photos: [
-      { src: "photos/wilbraham-ma-2025-06-13-01.jpg", date: "2025-05-21", caption: "College Day", spot: [42.1223378, -72.4313151] },
-      { src: "photos/wilbraham-ma-02.jpg", date: "2025-05-20", caption: "Senior Trip", spot: [42.1223378, -72.4313151] },
-      { src: "photos/wma1.jpg", date: "2025-05-20", caption: "", spot: [42.1223378, -72.4313151] },
-      { src: "photos/wilbraham-ma-01.jpg", date: "2025-05-17", caption: "Rugby senior game", spot: [42.1223378, -72.4313151] }
     ]
   },
   {
