@@ -15,10 +15,49 @@
  */
 const places = [
   {
+    name: "Claremont, CA",
+    coords: [34.0966764, -117.7197785],
+    photos: [
+      { src: "photos/claremont-ca-2026-07-26-01.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-02.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-03.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-04.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-05.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-06.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-07-26-07.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "see u soon too c Nhi !", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+    ]
+  },
+  {
     name: "Home",
     icon: "🛵",
     coords: [10.7737261, 106.7166008],
     photos: [
+      { src: "photos/home-2026-06-07-04.jpg", date: "2026-06-07", caption: "ashley in vietnam !", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-10-04.jpg", date: "2025-07-10", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-06-01-01.jpg", date: "2025-06-01", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-06-01-02.jpg", date: "2025-06-01", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-15-01.jpg", date: "2026-06-15", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-01.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-02.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-03.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-04.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-05.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-06.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-06-07.jpg", date: "2026-06-06", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-13-01.jpg", date: "2026-01-13", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-13-02.jpg", date: "2026-01-13", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-13-03.jpg", date: "2026-01-13", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-09-01.jpg", date: "2026-06-09", caption: "mãi mới hẹn đc celeb", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-09-02.jpg", date: "2026-06-09", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-09-03.jpg", date: "2026-06-09", caption: "L - nXL - X^nL", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-06-07-01.jpg", date: "2026-06-07", caption: "tình yêu tới rồi, bạch nguyệt quang về rồi", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-06-07-02.jpg", date: "2026-06-07", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-06-07-03.jpg", date: "2026-06-07", caption: "", spot: [10.7737261, 106.7166008] },
@@ -71,6 +110,23 @@ const places = [
     ]
   },
   {
+    name: "Rancho Cucamonga, CA",
+    coords: [34.1033192, -117.575173],
+    photos: [
+      { src: "photos/rancho-cucamonga-ca-2026-07-13-01.jpg", date: "2026-07-13", caption: "Out of battery midway :(", spot: [34.1033192, -117.575173] },
+      { src: "photos/rancho-cucamonga-ca-2026-07-13-02.jpg", date: "2026-07-13", caption: "", spot: [34.1033192, -117.575173] },
+      { src: "photos/rancho-cucamonga-ca-2026-07-13-03.jpg", date: "2026-07-13", caption: "", spot: [34.1033192, -117.575173] }
+    ]
+  },
+  {
+    name: "Laguna Beach, CA",
+    coords: [33.5426975, -117.785366],
+    photos: [
+      { src: "photos/laguna-beach-ca-2026-07-24-01.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-07-24-02.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] }
+    ]
+  },
+  {
     name: "Phan Thiết, Vietnam",
     coords: [10.9028645, 108.0632846],
     photos: [
@@ -106,20 +162,6 @@ const places = [
       { src: "photos/new-york-city-ny-undated-01.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] },
       { src: "photos/new-york-city-ny-undated-02.jpg", date: "2026-03-30", caption: "minions", spot: [40.7127281, -74.0060152] },
       { src: "photos/new-york-city-ny-2026-03-30-02.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] }
-    ]
-  },
-  {
-    name: "Claremont, CA",
-    coords: [34.0966764, -117.7197785],
-    photos: [
-      { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "see u soon too c Nhi !", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
     ]
   },
   {

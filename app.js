@@ -20,7 +20,7 @@ const map = L.map("map", {
   minZoom: 2,
   worldCopyJump: true,
   zoomControl: false
-}).setView([20, 0], 2);
+}).setView([10.7737, 106.7166], 7);
 
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
