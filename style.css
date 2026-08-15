@@ -4,15 +4,15 @@
  */
 :root {
   color-scheme: light;
-  --paper: #f4f4f1;
-  --paper-soft: #fbfbf8;
+  --paper: #f5f0e6;
+  --paper-soft: #fbf8f0;
   --ink: #1e2929;
   --muted: #65706f;
   --hairline: rgba(30, 41, 41, 0.16);
   --hairline-strong: rgba(30, 41, 41, 0.28);
   --accent: #ef694f;
   --accent-deep: #bf4938;
-  --panel: rgba(251, 251, 248, 0.97);
+  --panel: rgba(251, 248, 240, 0.97);
   --shadow: 0 18px 60px rgba(24, 36, 36, 0.16);
   --serif: Georgia, "Times New Roman", serif;
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -212,6 +212,17 @@ button {
   color: var(--muted);
 }
 
+/* Warm the basemap into the site's paper palette, so the map reads as if
+   printed on the same cream stock as the rest of the page. Dark mode keeps
+   its own untinted night tiles. */
+.leaflet-tile-pane {
+  filter: sepia(0.24) saturate(0.85) brightness(1.01);
+}
+
+:root[data-theme="dark"] .leaflet-tile-pane {
+  filter: none;
+}
+
 .map-hint {
   background: var(--panel);
   border: 1px solid var(--hairline);
@@ -227,6 +238,82 @@ button {
   padding: 10px 14px;
   position: fixed;
   z-index: 700;
+}
+
+.recent-card {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  bottom: 112px;
+  box-shadow: var(--shadow);
+  left: 18px;
+  padding: 12px 14px 8px;
+  position: fixed;
+  width: 240px;
+  z-index: 700;
+}
+
+.recent-title {
+  color: var(--accent-deep);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.recent-item {
+  align-items: center;
+  background: transparent;
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+  text-align: left;
+  width: 100%;
+}
+
+.recent-item img {
+  background: linear-gradient(135deg, rgba(239, 105, 79, 0.16), rgba(91, 136, 132, 0.19));
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(21, 37, 37, 0.18);
+  height: 40px;
+  image-orientation: from-image;
+  object-fit: cover;
+  width: 40px;
+}
+
+.recent-item img.is-missing {
+  visibility: hidden;
+}
+
+.recent-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.recent-place {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-date {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.recent-item:hover .recent-place {
+  color: var(--accent-deep);
+}
+
+@media (max-width: 767px) {
+  .recent-card {
+    display: none;
+  }
 }
 
 .travel-marker {

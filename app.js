@@ -441,5 +441,56 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function renderRecent() {
+  const recentCard = document.querySelector(".recent-card");
+  const recentList = document.querySelector("#recent-list");
+
+  // The latest photo date per place, newest places first.
+  const latest = places
+    .map((place, placeIndex) => {
+      const dates = (Array.isArray(place.photos) ? place.photos : [])
+        .map((photo) => photo.date)
+        .filter(Boolean)
+        .sort();
+      return { place, placeIndex, date: dates[dates.length - 1] || "", photo: null };
+    })
+    .filter((entry) => entry.date)
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 3);
+
+  if (!latest.length) {
+    recentCard.hidden = true;
+    return;
+  }
+
+  latest.forEach((entry) => {
+    const newestPhoto = entry.place.photos.find((photo) => photo.date === entry.date);
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "recent-item";
+
+    const thumb = document.createElement("img");
+    thumb.src = newestPhoto?.src || "";
+    thumb.alt = "";
+    thumb.loading = "lazy";
+    thumb.addEventListener("error", () => thumb.classList.add("is-missing"));
+
+    const text = document.createElement("span");
+    text.className = "recent-text";
+    text.innerHTML = `
+      <span class="recent-place">${escapeHtml(entry.place.name)}</span>
+      <span class="recent-date">${formatDate(entry.date)}</span>
+    `;
+
+    item.append(thumb, text);
+    item.addEventListener("click", () => {
+      const layer = markerLayers[entry.placeIndex];
+      if (layer) openPanel(entry.place, entry.placeIndex, layer.target);
+    });
+    recentList.append(item);
+  });
+}
+
 swapTileLayer();
 addMarkers();
+renderRecent();
