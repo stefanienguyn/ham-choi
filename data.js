@@ -22,7 +22,7 @@ const places = [
       { src: "photos/home-2026-06-15-02.jpg", date: "2026-06-15", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-06-15-03.jpg", date: "2026-06-15", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-06-15-04.jpg", date: "2026-06-15", caption: "", spot: [10.7737261, 106.7166008] },
-      { src: "photos/home-2026-06-07-04.jpg", date: "2026-06-07", caption: "ashley in vietnam !", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-06-07-04.jpg", date: "2025-06-07", caption: "ashley in vietnam !", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2025-07-10-04.jpg", date: "2025-07-10", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2025-06-01-01.jpg", date: "2025-06-01", caption: "", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2025-06-01-02.jpg", date: "2025-06-01", caption: "", spot: [10.7737261, 106.7166008] },
