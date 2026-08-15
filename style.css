@@ -311,8 +311,18 @@ button {
 }
 
 @media (max-width: 767px) {
+  /* Phones: the bottom edge belongs to the tip card and the photo panel,
+     so Recently tucks under the logo instead. */
   .recent-card {
-    display: none;
+    bottom: auto;
+    left: 12px;
+    top: 64px;
+    width: 200px;
+  }
+
+  .recent-card .recent-item img {
+    height: 34px;
+    width: 34px;
   }
 }
 
