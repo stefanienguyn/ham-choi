@@ -15,6 +15,18 @@
  */
 const places = [
   {
+    name: "Los Angeles, CA",
+    coords: [34.0536909, -118.242766],
+    photos: [
+      { src: "photos/los-angeles-ca-2026-07-28-01.jpg", date: "2026-07-28", caption: "Hollywood", spot: [34.0536909, -118.242766] },
+      { src: "photos/los-angeles-ca-2026-07-20-01.jpg", date: "2026-07-20", caption: "Little Tokyo !", spot: [34.0536909, -118.242766] },
+      { src: "photos/los-angeles-ca-2026-07-20-02.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
+      { src: "photos/los-angeles-ca-2026-07-20-03.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
+      { src: "photos/los-angeles-ca-2026-07-20-04.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
+      { src: "photos/los-angeles-ca-2026-07-20-05.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] }
+    ]
+  },
+  {
     name: "Home",
     icon: "🛵",
     coords: [10.7737261, 106.7166008],
@@ -156,17 +168,6 @@ const places = [
     coords: [33.6783336, -118.000016],
     photos: [
       { src: "photos/huntington-beach-ca-2026-05-10-01.jpg", date: "2026-05-10", caption: "Ski Beach day!", spot: [33.6783336, -118.000016] }
-    ]
-  },
-  {
-    name: "Los Angeles, CA",
-    coords: [34.0536909, -118.242766],
-    photos: [
-      { src: "photos/los-angeles-ca-2026-07-20-01.jpg", date: "2026-07-20", caption: "Little Tokyo !", spot: [34.0536909, -118.242766] },
-      { src: "photos/los-angeles-ca-2026-07-20-02.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
-      { src: "photos/los-angeles-ca-2026-07-20-03.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
-      { src: "photos/los-angeles-ca-2026-07-20-04.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] },
-      { src: "photos/los-angeles-ca-2026-07-20-05.jpg", date: "2026-07-20", caption: "", spot: [34.0536909, -118.242766] }
     ]
   },
   {

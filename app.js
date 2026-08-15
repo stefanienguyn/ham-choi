@@ -103,7 +103,7 @@ function getDateRange(photos) {
   if (!dates.length) return "No dates yet";
   if (dates.length === 1) return formatDate(dates[0]);
 
-  return `${formatDate(dates[dates.length - 1])} — ${formatDate(dates[0])}`;
+  return `${formatDate(dates[0])} — ${formatDate(dates[dates.length - 1])}`;
 }
 
 function closePanel() {
