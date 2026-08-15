@@ -51,8 +51,10 @@ const places = [
 ];
 ```
 
-Dates are `YYYY-MM-DD` strings so newest-first sorting is a plain string sort.
-Keep it that way — do not introduce Date objects for sorting.
+Dates are `YYYY-MM-DD` strings so day rows sort newest-first with a plain
+string sort. The panel shows one horizontal photo row per date; within a
+date, photos keep their hand-arranged `data.js` order and must not be
+auto-sorted. Do not introduce Date objects for sorting.
 
 ## Bugs already fixed — do not regress these
 
@@ -105,7 +107,10 @@ deploy; there is no build step.
 ## Conventions
 
 - Photos are resized to max 1600px on the long edge before being added.
-- Photo filenames are `place-01.jpg`, lowercase and hyphenated.
+- Photo filenames are `place-YYYY-MM-DD-01.jpg`, lowercase and hyphenated.
+  The admin tool numbers within each place+date and never reuses a name
+  already present in data.js. (Older files may use the short `place-01.jpg`
+  form; leave them as they are.)
 - Every photo `img` needs `loading="lazy"` and alt text from its caption.
 - `image-orientation: from-image` on photo CSS, so phone photos aren't
   rotated.

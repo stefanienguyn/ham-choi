@@ -354,10 +354,41 @@ button {
   transform: rotate(90deg);
 }
 
+.photo-days {
+  margin-top: 12px;
+}
+
+.photo-day {
+  margin-top: 22px;
+}
+
+.photo-day-header {
+  align-items: center;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+}
+
+.photo-day-header .photo-date {
+  margin: 0;
+}
+
+.day-nav {
+  align-items: center;
+  display: flex;
+  gap: 2px;
+}
+
+.day-nav .strip-counter {
+  font-size: 13px;
+  margin-right: 6px;
+}
+
 .photo-strip {
   display: flex;
   gap: 14px;
-  margin-top: 26px;
+  margin-top: 12px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
@@ -375,15 +406,6 @@ button {
 
 .photo-strip .empty-state {
   flex: 0 0 100%;
-}
-
-.strip-footer {
-  align-items: center;
-  border-top: 1px solid var(--hairline);
-  display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-  padding-top: 10px;
 }
 
 .strip-counter {
@@ -928,7 +950,7 @@ button {
   }
 
   .photo-strip {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .photo-image-wrap,

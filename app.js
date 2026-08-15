@@ -36,11 +36,7 @@ const placePanel = document.querySelector(".place-panel");
 const placeTitle = document.querySelector("#place-title");
 const placeMeta = document.querySelector("#place-meta");
 const placeSummary = document.querySelector("#place-summary");
-const photoStrip = document.querySelector("#photo-strip");
-const stripFooter = document.querySelector(".strip-footer");
-const stripCounter = document.querySelector("#strip-counter");
-const stripPrev = document.querySelector(".strip-prev");
-const stripNext = document.querySelector(".strip-next");
+const photoDays = document.querySelector("#photo-days");
 const viewAllButton = document.querySelector(".view-all");
 const noteView = document.querySelector(".note-view");
 const noteImage = document.querySelector("#note-image");
@@ -84,12 +80,22 @@ function formatDate(dateString) {
   }).format(date);
 }
 
-function getSortedPhotos(place) {
-  return Array.isArray(place.photos)
-    ? place.photos
-        .map((photo, originalIndex) => ({ ...photo, originalIndex }))
-        .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
-    : [];
+function getPhotoDays(place) {
+  // One row per date: days stack newest-first, while photos within a day
+  // keep the hand-arranged order they have in data.js.
+  const days = [];
+  const byDate = new Map();
+  (Array.isArray(place.photos) ? place.photos : []).forEach((photo) => {
+    const key = photo.date || "";
+    if (!byDate.has(key)) {
+      const day = { date: key, photos: [] };
+      byDate.set(key, day);
+      days.push(day);
+    }
+    byDate.get(key).photos.push(photo);
+  });
+  days.sort((a, b) => b.date.localeCompare(a.date));
+  return days;
 }
 
 function getDateRange(photos) {
@@ -116,7 +122,7 @@ function panToMarker(marker) {
   map.panTo([target.lat, target.lng], { animate: true, duration: 0.55, offset: panelOffset });
 }
 
-function renderPhoto(photo, index) {
+function renderPhoto(photo, index, showDate = true) {
   const entry = document.createElement("article");
   entry.className = "photo-entry";
   // Cap the stagger so late photos in a big gallery don't wait seconds to appear.
@@ -143,7 +149,7 @@ function renderPhoto(photo, index) {
   const details = document.createElement("div");
   details.className = "photo-details";
   details.innerHTML = `
-    <p class="photo-date">${formatDate(photo.date)}</p>
+    ${showDate ? `<p class="photo-date">${formatDate(photo.date)}</p>` : ""}
     ${photo.caption ? `<p class="photo-caption">${escapeHtml(photo.caption)}</p>` : ""}
   `;
 
@@ -177,45 +183,87 @@ function openPanel(place, index, marker) {
 
   activePlace = place;
   activePlaceIndex = index;
-  activePhotos = getSortedPhotos(place);
+  const days = getPhotoDays(place);
+  activePhotos = days.flatMap((day) => day.photos);
   marker.getElement()?.classList.add("is-active");
 
   placeTitle.textContent = place.name || "Unnamed place";
   placeMeta.textContent = `${activePhotos.length} ${activePhotos.length === 1 ? "photograph" : "photographs"}`;
   placeSummary.textContent = getDateRange(activePhotos);
-  photoStrip.replaceChildren();
+  photoDays.replaceChildren();
 
   if (!activePhotos.length) {
     const emptyState = document.createElement("div");
     emptyState.className = "empty-state";
     emptyState.textContent = "No photographs have been added here yet.";
-    photoStrip.append(emptyState);
+    photoDays.append(emptyState);
   } else {
-    activePhotos.forEach((photo, photoIndex) => photoStrip.append(renderPhoto(photo, photoIndex)));
+    let startIndex = 0;
+    days.forEach((day) => {
+      photoDays.append(renderDaySection(day, startIndex));
+      startIndex += day.photos.length;
+    });
   }
 
-  photoStrip.scrollTo({ left: 0 });
-  updateStrip();
+  viewAllButton.hidden = activePhotos.length < 2;
   placePanel.classList.add("is-open");
   placePanel.setAttribute("aria-hidden", "false");
   panToMarker(marker);
 }
 
-function stripStep() {
-  // One slide's travel distance: a card plus the flex gap between cards.
-  const card = photoStrip.querySelector(".photo-entry");
-  const gap = parseFloat(getComputedStyle(photoStrip).columnGap) || 0;
-  return card ? card.offsetWidth + gap : photoStrip.clientWidth;
-}
+function renderDaySection(day, startIndex) {
+  const section = document.createElement("section");
+  section.className = "photo-day";
 
-function updateStrip() {
-  const total = activePhotos.length;
-  const index = total ? Math.min(total - 1, Math.max(0, Math.round(photoStrip.scrollLeft / stripStep()))) : 0;
-  stripCounter.textContent = total ? `${index + 1} / ${total}` : "";
-  stripPrev.disabled = index <= 0;
-  stripNext.disabled = index >= total - 1;
-  stripFooter.hidden = total < 2;
-  viewAllButton.hidden = total < 2;
+  const header = document.createElement("div");
+  header.className = "photo-day-header";
+  const label = document.createElement("p");
+  label.className = "photo-date";
+  label.textContent = formatDate(day.date);
+  header.append(label);
+
+  const strip = document.createElement("div");
+  strip.className = "photo-strip";
+  day.photos.forEach((photo, offset) => strip.append(renderPhoto(photo, startIndex + offset, false)));
+
+  if (day.photos.length > 1) {
+    const nav = document.createElement("div");
+    nav.className = "day-nav";
+    const counter = document.createElement("span");
+    counter.className = "strip-counter";
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "strip-arrow";
+    prev.textContent = "←";
+    prev.setAttribute("aria-label", "Previous photo of this day");
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "strip-arrow";
+    next.textContent = "→";
+    next.setAttribute("aria-label", "Next photo of this day");
+
+    // One slide's travel distance: a card plus the flex gap between cards.
+    const step = () => {
+      const card = strip.querySelector(".photo-entry");
+      const gap = parseFloat(getComputedStyle(strip).columnGap) || 0;
+      return card ? card.offsetWidth + gap : strip.clientWidth;
+    };
+    const update = () => {
+      const position = Math.min(day.photos.length - 1, Math.max(0, Math.round(strip.scrollLeft / step())));
+      counter.textContent = `${position + 1} / ${day.photos.length}`;
+      prev.disabled = position <= 0;
+      next.disabled = position >= day.photos.length - 1;
+    };
+    prev.addEventListener("click", () => strip.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => strip.scrollBy({ left: step(), behavior: "smooth" }));
+    strip.addEventListener("scroll", update, { passive: true });
+    update();
+    nav.append(counter, prev, next);
+    header.append(nav);
+  }
+
+  section.append(header, strip);
+  return section;
 }
 
 function openGallery() {
@@ -359,9 +407,6 @@ themeToggle.addEventListener("click", () => {
   swapTileLayer();
 });
 
-photoStrip.addEventListener("scroll", updateStrip, { passive: true });
-stripPrev.addEventListener("click", () => photoStrip.scrollBy({ left: -stripStep(), behavior: "smooth" }));
-stripNext.addEventListener("click", () => photoStrip.scrollBy({ left: stripStep(), behavior: "smooth" }));
 viewAllButton.addEventListener("click", openGallery);
 document.querySelector(".gallery-close").addEventListener("click", closeGallery);
 document.querySelector(".note-close").addEventListener("click", closeNote);
