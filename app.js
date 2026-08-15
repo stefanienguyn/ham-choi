@@ -1,5 +1,5 @@
 /*
- * Field Notes map logic.
+ * Ham Chơi map logic.
  *
  * The two tile URLs are intentionally kept here, near the top, so they are
  * easy to change later. They do not require an API key.
