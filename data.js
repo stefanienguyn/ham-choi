@@ -154,13 +154,13 @@ const places = [
       { src: "photos/claremont-ca-2026-07-26-06.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-07-26-07.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "u too c Nhi", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+      { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
     ]
   },
   {
