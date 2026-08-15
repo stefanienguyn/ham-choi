@@ -15,11 +15,13 @@
  */
 const places = [
   {
-    name: "Tokyo, Japan",
-    coords: [35.6768601, 139.7638947],
+    name: "New York City, NY",
+    coords: [40.7127281, -74.0060152],
     photos: [
-      { src: "photos/tokyo-japan-2025-11-23-01.jpg", date: "2025-11-23", caption: "", spot: [35.6768601, 139.7638947] },
-      { src: "photos/tokyo-japan-2025-11-23-02.jpg", date: "2025-11-23", caption: "", spot: [35.6768601, 139.7638947] }
+      { src: "photos/new-york-city-ny-2026-03-30-01.jpg", date: "2026-03-30", caption: "the trio", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-undated-01.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-undated-02.jpg", date: "2026-03-30", caption: "minions", spot: [40.7127281, -74.0060152] },
+      { src: "photos/new-york-city-ny-2026-03-30-02.jpg", date: "2026-03-30", caption: "", spot: [40.7127281, -74.0060152] }
     ]
   },
   {
@@ -27,6 +29,12 @@ const places = [
     icon: "🛵",
     coords: [10.7737261, 106.7166008],
     photos: [
+      { src: "photos/home-2026-01-07-01.jpg", date: "2026-01-07", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2026-01-07-02.jpg", date: "2026-01-07", caption: "", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-25-01.jpg", date: "2025-07-25", caption: "Đi coi tarot cho thầy Trí :v", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-25-02.jpg", date: "2025-07-25", caption: "Đợi thầy tới", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-20-01.jpg", date: "2025-07-20", caption: "đi ăn với thầy Trí", spot: [10.7737261, 106.7166008] },
+      { src: "photos/home-2025-07-20-02.jpg", date: "2025-07-20", caption: "đi ăn với thầy Trí", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2026-01-09-01.jpg", date: "2026-01-09", caption: "đi nhậu xoq để quên xe :)", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2022-11-20-01.jpg", date: "2022-11-20", caption: "hong nhớ hồi nào nữa để đại :v", spot: [10.7737261, 106.7166008] },
       { src: "photos/home-2022-11-20-02.jpg", date: "2022-11-20", caption: "", spot: [10.7737261, 106.7166008] },
@@ -38,6 +46,42 @@ const places = [
       { src: "photos/dinh2.jpg", date: "2023-10-01", caption: "Hai đứa trẻ", spot: [10.7737261, 106.7166008] },
       { src: "photos/dinh3.jpg", date: "2023-10-01", caption: "Dinh em iu", spot: [10.7737261, 106.7166008] },
       { src: "photos/dinh4.jpg", date: "2023-10-01", caption: "", spot: [10.7737261, 106.7166008] }
+    ]
+  },
+  {
+    name: "Claremont, CA",
+    coords: [34.0966764, -117.7197785],
+    photos: [
+      { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-07.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+    ]
+  },
+  {
+    name: "Củ Chi, Vietnam",
+    coords: [10.9744159, 106.4948968],
+    photos: [
+      { src: "photos/cu-chi-vietnam-2025-07-27-01.jpg", date: "2025-07-27", caption: "Đi Hong Kong về xoq đi chơi tiếp, cô Hoa đth hong nghe máy :))", spot: [10.9744159, 106.4948968] }
+    ]
+  },
+  {
+    name: "Kyoto, Japan",
+    coords: [35.0115754, 135.7681441],
+    photos: [
+      { src: "photos/kyoto-japan-2025-11-25-01.jpg", date: "2025-11-25", caption: "was on a matcha hunt", spot: [35.0115754, 35.0115754] },
+      { src: "photos/kyoto-japan-2025-11-25-02.jpg", date: "2025-11-25", caption: "", spot: [35.0115754, 35.0115754] }
+    ]
+  },
+  {
+    name: "Tokyo, Japan",
+    coords: [35.6768601, 139.7638947],
+    photos: [
+      { src: "photos/tokyo-japan-2025-11-23-01.jpg", date: "2025-11-23", caption: "", spot: [35.6768601, 139.7638947] },
+      { src: "photos/tokyo-japan-2025-11-23-02.jpg", date: "2025-11-23", caption: "", spot: [35.6768601, 139.7638947] }
     ]
   },
   {
