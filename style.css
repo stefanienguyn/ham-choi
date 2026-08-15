@@ -377,6 +377,48 @@ button {
   transform: scale(1.28);
 }
 
+.leaflet-tooltip.start-bubble {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--accent-deep);
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  padding: 0;
+  pointer-events: none;
+}
+
+.leaflet-tooltip.start-bubble::before {
+  display: none;
+}
+
+.leaflet-tooltip.start-bubble span {
+  display: block;
+  text-shadow: 0 0 8px var(--paper), 0 1px 2px var(--paper);
+}
+
+:root[data-theme="dark"] .leaflet-tooltip.start-bubble {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .leaflet-tooltip.start-bubble span {
+    animation: start-bob 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes start-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 .leaflet-tooltip {
   background: var(--ink);
   border: 0;

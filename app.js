@@ -27,6 +27,7 @@ L.control.zoom({ position: "bottomright" }).addTo(map);
 let activeTileLayer = null;
 let themeOverride = null;
 let activePlaceIndex = -1;
+let startBubble = null;
 let activePlace = null;
 let activePhotos = [];
 let activePhotoIndex = 0;
@@ -179,6 +180,12 @@ function escapeHtml(value) {
 function openPanel(place, index, marker) {
   if (activePlaceIndex >= 0 && markerLayers[activePlaceIndex]) {
     markerLayers[activePlaceIndex].dot.getElement()?.classList.remove("is-active");
+  }
+
+  // The visitor found their way in; the start bubble has done its job.
+  if (startBubble) {
+    map.removeLayer(startBubble);
+    startBubble = null;
   }
 
   activePlace = place;
@@ -494,3 +501,15 @@ function renderRecent() {
 swapTileLayer();
 addMarkers();
 renderRecent();
+
+// A "click to start" bubble over Home (or the first place) until the
+// first panel is opened.
+const startPlaceIndex = Math.max(0, places.findIndex((place) => place.icon));
+if (markerLayers[startPlaceIndex]) {
+  // The bob animation lives on the inner span: Leaflet positions the
+  // tooltip itself with a transform, which an animation would fight.
+  startBubble = L.tooltip({ className: "start-bubble", direction: "top", offset: [0, -6], permanent: true })
+    .setLatLng(markerLayers[startPlaceIndex].target.getLatLng())
+    .setContent("<span>click here to start</span>")
+    .addTo(map);
+}

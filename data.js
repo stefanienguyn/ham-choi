@@ -15,6 +15,13 @@
  */
 const places = [
   {
+    name: "Portland, ME",
+    coords: [43.6573605, -70.2586618],
+    photos: [
+      { src: "photos/portland-me-2026-08-05-01.jpg", date: "2026-08-05", caption: "", spot: [43.6573605, -70.2586618] }
+    ]
+  },
+  {
     name: "Los Angeles, CA",
     coords: [34.0536909, -118.242766],
     photos: [
@@ -147,7 +154,7 @@ const places = [
       { src: "photos/claremont-ca-2026-07-26-06.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-07-26-07.jpg", date: "2026-07-26", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-01.jpg", date: "2026-05-29", caption: "see u soon c Châu :<", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "see u soon too c Nhi !", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-05-29-08.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-02.jpg", date: "2026-05-29", caption: "ReCoop", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-03.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
@@ -307,12 +314,12 @@ const places = [
     name: "San Francisco, CA",
     coords: [37.7879363, -122.4075201],
     photos: [
-      { src: "photos/san-francisco-ca-01.jpg", date: "2026-08-13", caption: "Huyền in the US !", spot: [37.7879363, -122.4075201] },
-      { src: "photos/san-francisco-ca-02.jpg", date: "2026-08-13", caption: "", spot: [37.7879363, -122.4075201] },
-      { src: "photos/san-francisco-ca-03.jpg", date: "2026-08-13", caption: "", spot: [37.7879363, -122.4075201] },
-      { src: "photos/san-francisco-ca-04.jpg", date: "2026-08-13", caption: "", spot: [37.7879363, -122.4075201] },
-      { src: "photos/san-francisco-ca-05.jpg", date: "2026-08-13", caption: "", spot: [37.7879363, -122.4075201] },
-      { src: "photos/san-francisco-ca-06.jpg", date: "2026-08-13", caption: "Nhìn đi đâu v ?", spot: [37.7879363, -122.4075201] }
+      { src: "photos/san-francisco-ca-01.jpg", date: "2026-07-25", caption: "Huyền in the US !", spot: [37.7879363, -122.4075201] },
+      { src: "photos/san-francisco-ca-02.jpg", date: "2026-07-25", caption: "", spot: [37.7879363, -122.4075201] },
+      { src: "photos/san-francisco-ca-03.jpg", date: "2026-07-25", caption: "", spot: [37.7879363, -122.4075201] },
+      { src: "photos/san-francisco-ca-04.jpg", date: "2026-07-25", caption: "", spot: [37.7879363, -122.4075201] },
+      { src: "photos/san-francisco-ca-05.jpg", date: "2026-07-25", caption: "", spot: [37.7879363, -122.4075201] },
+      { src: "photos/san-francisco-ca-06.jpg", date: "2026-07-25", caption: "Nhìn đi đâu v ?", spot: [37.7879363, -122.4075201] }
     ]
   },
   {
