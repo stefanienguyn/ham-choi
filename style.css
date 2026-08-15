@@ -493,6 +493,10 @@ button {
 
 .photo-image-wrap {
   background: linear-gradient(135deg, rgba(239, 105, 79, 0.16), rgba(91, 136, 132, 0.19));
+  /* A thin white mat and soft shadow, like a print laid on paper. Prints
+     stay white-bordered in dark mode too — that's what makes them prints. */
+  border: 5px solid #fff;
+  box-shadow: 0 2px 10px rgba(21, 37, 37, 0.16);
   min-height: 170px;
   overflow: hidden;
   position: relative;
@@ -513,12 +517,14 @@ button {
 }
 
 .photo-image-wrap img {
+  /* Never cropped: photos keep their full frame. Tall photos stop growing
+     at the height cap and sit centred on the white mat instead. */
+  background: #fff;
   display: block;
   height: auto;
   image-orientation: from-image;
-  max-height: 390px;
-  min-height: 170px;
-  object-fit: cover;
+  max-height: 460px;
+  object-fit: contain;
   position: relative;
   width: 100%;
   z-index: 1;
@@ -984,8 +990,7 @@ button {
     margin-top: 10px;
   }
 
-  .photo-image-wrap,
-  .photo-image-wrap img {
+  .photo-image-wrap {
     min-height: 145px;
   }
 
