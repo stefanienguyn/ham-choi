@@ -62,3 +62,13 @@ wireframe — warm-grey water (the sphere path, now painted first), cream
 land, faint borders, dots in the markers' accent-and-white. Dark-theme
 fills included for completeness, though the intro always runs in light
 mode since themes reset each visit.
+
+Final shape: spin (5s) → dive to home while still a globe (2s, exponential
+scale 205→1800) → flatten in place at that zoom (0.9s, rotation pinned on
+home), with the fade to Leaflet starting 40% into the flatten so the
+motion and the crossfade overlap into one continuous action. The old
+pull-back unroll and separate dive are gone, which let the code simplify:
+no centring translate, and the 90° hemisphere clip is now permanent
+because the whole world is never shown flat (this also removes the
+far-side mirror flash risk entirely). finish() no longer stops the frame
+loop — removeIntro does — so the animation keeps playing under the fade.

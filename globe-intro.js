@@ -1,9 +1,10 @@
 /*
  * Ham Chơi globe intro.
  *
- * A wireframe globe spins briefly, unrolls into a flat world map
- * (orthographic → equirectangular, adapted from a React/d3 component),
- * then fades away to reveal the real Leaflet map underneath.
+ * A globe spins toward home, dives right down to it, then flattens into a
+ * map underneath you (orthographic → equirectangular, adapted from a
+ * React/d3 component) and fades into the real Leaflet map, which also
+ * opens centred on home.
  *
  * The intro is pure decoration: clicking skips it, reduced-motion visitors
  * never see it, and if anything is missing (d3, the world data) the overlay
@@ -13,7 +14,14 @@
   const intro = document.querySelector(".globe-intro");
   if (!intro) return;
 
-  const removeIntro = () => intro.remove();
+  // Declared before removeIntro, which the early guards below call.
+  let rafId = 0;
+  let finished = false;
+
+  const removeIntro = () => {
+    cancelAnimationFrame(rafId);
+    intro.remove();
+  };
 
   if (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
@@ -28,12 +36,13 @@
 
   const WIDTH = 800;
   const HEIGHT = 500;
-  const SPIN_MS = 3000; // globe drifts toward home, pushing in slightly
-  const UNROLL_MS = 1900; // globe → flat map
-  const ZOOM_MS = 1500; // flat map → diving down toward home
+  const SPIN_MS = 5000; // globe drifts toward home
+  const GLOBE_ZOOM_MS = 2000; // still a globe: dive right down to home
+  const UNROLL_MS = 900; // flattens under you, holding position over home
   const FADE_MS = 650; // keep in sync with the .globe-intro CSS transition
   const START_TILT = -14; // slight downward tilt while in globe form
-  const ZOOM_FACTOR = 10; // how far the final dive magnifies the flat map
+  const START_SCALE = 205; // whole-globe radius
+  const ZOOM_SCALE = 1800; // how close the dive gets before flattening
 
   const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
@@ -107,12 +116,12 @@
       };
     });
 
-  const updateLabels = (alpha, lambda, phi) => {
+  const updateLabels = (lambda, phi) => {
     const placed = [];
     labels.forEach((label) => {
-      // While still a globe, hide tags on the far side (with a margin, so
-      // none dangle right on the edge of the disc).
-      const onBack = alpha < 0.15 && d3.geoDistance(label.lonlat, [-lambda, -phi]) > 1.45;
+      // Hide tags on the far side of the view (with a margin, so none
+      // dangle right on the edge of the disc).
+      const onBack = d3.geoDistance(label.lonlat, [-lambda, -phi]) > 1.45;
       const point = onBack ? null : projection(label.lonlat);
       let visible =
         Boolean(point) &&
@@ -152,43 +161,31 @@
     element.setAttribute("d", d && !d.includes("NaN") ? d : "");
   };
 
-  const render = (alpha, lambda, phi, scale, centerU) => {
+  const render = (alpha, lambda, phi, scale) => {
     projection
       .scale(scale)
       .translate([WIDTH / 2, HEIGHT / 2])
       .rotate([lambda, phi])
-      // Show only the front hemisphere while it is still a globe (otherwise
-      // the far side draws mirrored on top). Once the unroll is properly
-      // underway the whole world has to be visible; an interpolated clip
-      // angle strokes its own rim across the map, so switch, not blend.
-      .clipAngle(alpha < 0.15 ? 90 : null)
+      // Only ever show the hemisphere around home (otherwise the far side
+      // draws mirrored on top of it). The view stays zoomed right through
+      // the flattening, so the 90° cap edge never comes on screen.
+      .clipAngle(90)
       .precision(0.3);
     projection.alpha(alpha);
-    // During the final dive, pull the map across so home ends dead centre.
-    if (centerU > 0) {
-      const homePoint = projection([homeLng, homeLat]);
-      if (homePoint && Number.isFinite(homePoint[0]) && Number.isFinite(homePoint[1])) {
-        projection.translate([
-          WIDTH / 2 + (WIDTH / 2 - homePoint[0]) * centerU,
-          HEIGHT / 2 + (HEIGHT / 2 - homePoint[1]) * centerU
-        ]);
-      }
-    }
     const geoPath = d3.geoPath(projection).pointRadius(3.2);
     setPath(graticulePath, geoPath(graticule));
     setPath(countriesPath, geoPath(countries));
     setPath(spherePath, geoPath({ type: "Sphere" }));
     setPath(dotsPath, geoPath(dots));
-    updateLabels(alpha, lambda, phi);
+    updateLabels(lambda, phi);
   };
 
-  let rafId = 0;
-  let finished = false;
-
+  // Starts the fade but lets the animation keep running underneath it, so
+  // the flattening and the crossfade to the real map overlap into one
+  // continuous motion. removeIntro stops the frame loop at the end.
   const finish = () => {
     if (finished) return;
     finished = true;
-    cancelAnimationFrame(rafId);
     intro.classList.add("is-done");
     setTimeout(removeIntro, FADE_MS + 60);
   };
@@ -198,25 +195,31 @@
     try {
       const elapsed = now - start;
       if (elapsed < SPIN_MS) {
-        // Slow drift eastward toward home, pushing in a little. The 36°
-        // arc keeps the same rotation speed the shorter spin had.
+        // Slow drift eastward toward home. The 60° arc keeps the same
+        // rotation speed the shorter spin had.
         const t = elapsed / SPIN_MS;
-        render(0, -homeLng - 36 * (1 - t), START_TILT, 205 + 30 * easeInOut(t), 0);
-      } else if (elapsed < SPIN_MS + UNROLL_MS) {
-        const t = (elapsed - SPIN_MS) / UNROLL_MS;
+        render(0, -homeLng - 60 * (1 - t), START_TILT, START_SCALE);
+      } else if (elapsed < SPIN_MS + GLOBE_ZOOM_MS) {
+        // Still a globe: dive right down to home, tilting so home sits
+        // centred. Exponential scale keeps the deep zoom feeling steady.
+        const t = (elapsed - SPIN_MS) / GLOBE_ZOOM_MS;
         const eased = easeInOut(t);
-        // sqrt makes the unroll start briskly and settle gently, as in the
-        // original component; rotation eases back to a north-up world map.
-        const alpha = Math.sqrt(eased);
-        render(alpha, -homeLng * (1 - eased), START_TILT * (1 - eased), 235 - 115 * alpha, 0);
-      } else if (elapsed < SPIN_MS + UNROLL_MS + ZOOM_MS) {
-        // Dive from the whole world down toward home, then hand the same
-        // view over to the real map (which also starts centred on home).
-        const t = (elapsed - SPIN_MS - UNROLL_MS) / ZOOM_MS;
-        const eased = easeInOut(t);
-        render(1, 0, 0, 120 * Math.pow(ZOOM_FACTOR, eased), eased);
+        render(
+          0,
+          -homeLng,
+          START_TILT + (-homeLat - START_TILT) * eased,
+          START_SCALE * Math.pow(ZOOM_SCALE / START_SCALE, eased)
+        );
+      } else if (elapsed < SPIN_MS + GLOBE_ZOOM_MS + UNROLL_MS) {
+        // The globe flattens into the map underneath you: same zoom, same
+        // spot over home, only the curvature eases away. The fade begins
+        // partway through, so the flattening dissolves straight into the
+        // real map with no pause.
+        const t = (elapsed - SPIN_MS - GLOBE_ZOOM_MS) / UNROLL_MS;
+        render(Math.sqrt(easeInOut(t)), -homeLng, -homeLat, ZOOM_SCALE);
+        if (t >= 0.4) finish();
       } else {
-        render(1, 0, 0, 120 * ZOOM_FACTOR, 1);
+        render(1, -homeLng, -homeLat, ZOOM_SCALE);
         finish();
         return;
       }
@@ -227,7 +230,7 @@
   };
 
   try {
-    render(0, -homeLng - 36, START_TILT, 205, 0);
+    render(0, -homeLng - 60, START_TILT, START_SCALE);
   } catch (error) {
     removeIntro();
     return;
