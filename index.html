@@ -11,6 +11,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="map-page">
+    <!-- Opening flourish: a wireframe globe unrolls into a flat map, then
+         fades away to reveal the real map. Clicking skips it. -->
+    <div class="globe-intro" aria-hidden="true">
+      <!-- Paint order matters: the sphere is the filled water, so it must
+           sit under the graticule and the filled land. -->
+      <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+        <path class="globe-sphere"></path>
+        <path class="globe-graticule"></path>
+        <path class="globe-countries"></path>
+        <path class="globe-dots"></path>
+      </svg>
+      <p class="globe-hint">click to skip</p>
+    </div>
+
     <main id="map" aria-label="Interactive map of travel photographs"></main>
 
     <p class="map-hint" role="note">Tip — some places sit so close together they hide behind one another. Zoom in to separate them, zoom out to travel further.</p>
@@ -93,7 +107,15 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- d3 (array + geo) and topojson-client power the globe intro only; if
+         they fail to load, globe-intro.js removes the overlay and the map is
+         unaffected. d3-array must come before d3-geo, which builds on it. -->
+    <script src="https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js" integrity="sha384-VpKMdU+TlpggHFip46tJ/xkFUs8NFBwLqUMo3+3uiu411lU6eUQYsHVU+JFpA5ja" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js" integrity="sha384-VNiKRUXp0MmglFfqDwkfuk+Y78C3WTJShdKSaFwOacLR3UmamxHIJLBTD3BadIXD" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin=""></script>
     <script src="data.js"></script>
+    <script src="world-110m.js"></script>
     <script src="app.js"></script>
+    <script src="globe-intro.js"></script>
   </body>
 </html>

@@ -13,7 +13,9 @@ reviewable edits over refactors.
 - Vanilla HTML, CSS, and JavaScript only. No React, no Vue, no framework.
 - No npm, no bundler, no build step, no package.json. Ever.
 - Every file must run by being opened directly in a browser.
-- Leaflet 1.9.4 and exifr load from CDN via script tags.
+- Leaflet 1.9.4 and exifr load from CDN via script tags, as do d3-geo and
+  topojson-client (globe intro only — the map must keep working if they
+  fail to load).
 - No backend, no database, no login, no localStorage.
 - All CDN URLs use an explicit `https://` — never protocol-relative `//`.
   I open these files from the local filesystem, where `//` resolves to
@@ -30,8 +32,14 @@ build tool, or a dependency manager, even if it would be cleaner.
 - `style.css` — shared styling
 - `data.js` — all my content (I edit this by hand)
 - `app.js` — map logic
+- `globe-intro.js` — opening globe-unroll animation; removes itself, never
+  required for the map to work
+- `world-110m.js` — country outline data for the globe intro (generated,
+  don't edit)
 - `photos/` — my images
 - `admin.html` — private local tool, gitignored, NEVER deployed
+- `globe-to-map-transform/` — reference-only React component the globe intro
+  was adapted from, gitignored, never deployed
 
 ## The data contract
 

@@ -52,5 +52,8 @@ Thumbs.db
 # Private local admin tool — never deploy
 admin.html
 
+# Reference-only React component the globe intro was adapted from
+globe-to-map-transform/
+
 # Local Claude Code settings
 .claude/
