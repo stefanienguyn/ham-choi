@@ -34,15 +34,28 @@
     return;
   }
 
+  // The drawing surface fills the screen: the viewBox height follows the
+  // window's shape, so nothing is letterboxed and the flattened map covers
+  // the whole viewport before the fade.
   const WIDTH = 800;
-  const HEIGHT = 500;
+  const HEIGHT = Math.round(WIDTH * (window.innerHeight / Math.max(1, window.innerWidth)));
   const SPIN_MS = 5000; // globe drifts toward home
   const GLOBE_ZOOM_MS = 2000; // still a globe: dive right down to home
   const UNROLL_MS = 900; // flattens under you, holding position over home
   const FADE_MS = 650; // keep in sync with the .globe-intro CSS transition
   const START_TILT = -14; // slight downward tilt while in globe form
-  const START_SCALE = 205; // whole-globe radius
+  // Whole-globe radius, sized to the screen's shape: tall phone screens are
+  // width-limited, wide desktop screens height-limited.
+  const START_SCALE = Math.round(Math.min(0.3 * HEIGHT, 0.42 * WIDTH));
   const ZOOM_SCALE = 1800; // how close the dive gets before flattening
+  // On phones the 800-unit viewBox maps to a narrow screen, halving the
+  // rendered size of everything; dots and labels compensate (the label
+  // font itself is bumped in style.css, so the overlap-check numbers here
+  // must describe that larger text).
+  const SMALL_SCREEN = window.innerWidth < 640;
+  const DOT_RADIUS = SMALL_SCREEN ? 6.5 : 3.2;
+  const LABEL_CHAR_W = SMALL_SCREEN ? 12 : 6.5;
+  const LABEL_H = SMALL_SCREEN ? 28 : 16;
 
   const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
@@ -99,8 +112,11 @@
   const spherePath = intro.querySelector(".globe-sphere");
   const dotsPath = intro.querySelector(".globe-dots");
 
-  // One name tag per place, positioned every frame next to its dot.
   const svg = intro.querySelector("svg");
+  // Match the drawing to the window's shape (see WIDTH/HEIGHT above).
+  svg.setAttribute("viewBox", `0 0 ${WIDTH} ${HEIGHT}`);
+
+  // One name tag per place, positioned every frame next to its dot.
   const labels = validPlaces
     .filter((place) => place.name)
     .map((place) => {
@@ -112,7 +128,7 @@
         el,
         lonlat: [Number(place.coords[1]), Number(place.coords[0])],
         // Rough text width for the overlap check below.
-        width: String(place.name).length * 6.5 + 10
+        width: String(place.name).length * LABEL_CHAR_W + 10
       };
     });
 
@@ -132,14 +148,14 @@
         point[1] > 0 &&
         point[1] < HEIGHT;
       if (visible) {
-        // Tags near the right edge flip to the left of their dot; a tag
-        // that would overlap an already-placed one stays hidden.
-        const flip = point[0] > WIDTH - 110;
+        // Tags that would run off the right edge flip to the left of their
+        // dot; a tag that would overlap an already-placed one stays hidden.
+        const flip = point[0] + 8 + label.width > WIDTH - 8;
         const box = {
           x: flip ? point[0] - 8 - label.width : point[0] + 8,
-          y: point[1] - 12,
+          y: point[1] - LABEL_H * 0.75,
           w: label.width,
-          h: 16
+          h: LABEL_H
         };
         const overlaps = placed.some(
           (b) => box.x < b.x + b.w && b.x < box.x + box.w && box.y < b.y + b.h && b.y < box.y + box.h
@@ -172,7 +188,7 @@
       .clipAngle(90)
       .precision(0.3);
     projection.alpha(alpha);
-    const geoPath = d3.geoPath(projection).pointRadius(3.2);
+    const geoPath = d3.geoPath(projection).pointRadius(DOT_RADIUS);
     setPath(graticulePath, geoPath(graticule));
     setPath(countriesPath, geoPath(countries));
     setPath(spherePath, geoPath({ type: "Sphere" }));

@@ -84,9 +84,13 @@ button {
   pointer-events: none;
 }
 
+/* The svg fills the whole viewport; globe-intro.js gives its viewBox the
+   same shape, so the drawing is never letterboxed. dvh tracks the real
+   visible height on phones, where browser chrome eats into 100vh. */
 .globe-intro svg {
-  height: auto;
-  width: min(92vw, 980px);
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
 }
 
 .globe-intro path {
@@ -152,6 +156,15 @@ button {
   position: absolute;
   right: 0;
   text-align: center;
+}
+
+/* Phones map the intro's 800-unit-wide drawing onto a narrow screen, which
+   halves the rendered text size — these are viewBox units, not screen px. */
+@media (max-width: 639px) {
+  .globe-label {
+    font-size: 22px;
+    stroke-width: 5;
+  }
 }
 
 /* CSS-level backup for the JS check: reduced-motion visitors go straight

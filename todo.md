@@ -72,3 +72,11 @@ no centring translate, and the 90° hemisphere clip is now permanent
 because the whole world is never shown flat (this also removes the
 far-side mirror flash risk entirely). finish() no longer stops the frame
 loop — removeIntro does — so the animation keeps playing under the fade.
+
+Responsive round: the svg now fills the viewport (100vw × 100dvh) and its
+viewBox height is computed from the window's shape at load, so nothing is
+letterboxed — the flattened map covers the whole screen before the fade,
+on desktop and phones alike. The globe radius adapts to the screen shape
+(width-limited on portrait phones, height-limited on desktop), and on
+screens under 640px the dots, label font, and the label overlap-check
+geometry are enlarged to compensate for the viewBox-to-screen scale.
