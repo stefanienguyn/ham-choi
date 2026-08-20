@@ -80,3 +80,7 @@ on desktop and phones alike. The globe radius adapts to the screen shape
 (width-limited on portrait phones, height-limited on desktop), and on
 screens under 640px the dots, label font, and the label overlap-check
 geometry are enlarged to compensate for the viewBox-to-screen scale.
+
+Icon markers: places with an `icon` in data.js (Home's scooter) draw that
+emoji on the globe instead of a dot, matching the main map's markers; their
+name tag sits a little further out to clear the wider emoji.

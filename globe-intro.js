@@ -95,9 +95,12 @@
       Number.isFinite(Number(place.coords[0])) &&
       Number.isFinite(Number(place.coords[1]))
   );
+  const lonlatOf = (place) => [Number(place.coords[1]), Number(place.coords[0])];
+  // Places with an icon (Home's scooter) get that emoji instead of a dot,
+  // matching the main map's markers.
   const dots = {
     type: "MultiPoint",
-    coordinates: validPlaces.map((place) => [Number(place.coords[1]), Number(place.coords[0])])
+    coordinates: validPlaces.filter((place) => !place.icon).map(lonlatOf)
   };
 
   // Start the globe centred near Home (the place with an icon), like the map.
@@ -116,43 +119,78 @@
   // Match the drawing to the window's shape (see WIDTH/HEIGHT above).
   svg.setAttribute("viewBox", `0 0 ${WIDTH} ${HEIGHT}`);
 
-  // One name tag per place, positioned every frame next to its dot.
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const ICON_SIZE = SMALL_SCREEN ? 26 : 14;
+
+  // Emoji markers for icon places, centred on their spot.
+  const icons = validPlaces
+    .filter((place) => place.icon)
+    .map((place) => {
+      const el = document.createElementNS(SVG_NS, "text");
+      el.setAttribute("class", "globe-icon");
+      el.setAttribute("font-size", ICON_SIZE);
+      el.setAttribute("text-anchor", "middle");
+      el.setAttribute("dominant-baseline", "central");
+      el.textContent = place.icon;
+      svg.append(el);
+      return { el, lonlat: lonlatOf(place) };
+    });
+
+  // One name tag per place, positioned every frame next to its marker.
   const labels = validPlaces
     .filter((place) => place.name)
     .map((place) => {
-      const el = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      const el = document.createElementNS(SVG_NS, "text");
       el.setAttribute("class", "globe-label");
       el.textContent = place.name;
       svg.append(el);
       return {
         el,
-        lonlat: [Number(place.coords[1]), Number(place.coords[0])],
-        // Rough text width for the overlap check below.
-        width: String(place.name).length * LABEL_CHAR_W + 10
+        lonlat: lonlatOf(place),
+        // Rough text width for the overlap check below, and how far the
+        // tag sits from its marker (an emoji is wider than a dot).
+        width: String(place.name).length * LABEL_CHAR_W + 10,
+        gap: place.icon ? ICON_SIZE * 0.6 + 4 : 8
       };
     });
 
+  // Screen position of a place, or null when it is hidden: on the far side
+  // of the view (with a margin, so nothing dangles right on the edge of the
+  // disc) or outside the drawing.
+  const visiblePoint = (lonlat, lambda, phi) => {
+    if (d3.geoDistance(lonlat, [-lambda, -phi]) > 1.45) return null;
+    const point = projection(lonlat);
+    const inside =
+      Boolean(point) &&
+      Number.isFinite(point[0]) &&
+      Number.isFinite(point[1]) &&
+      point[0] > -40 &&
+      point[0] < WIDTH + 40 &&
+      point[1] > -40 &&
+      point[1] < HEIGHT + 40;
+    return inside ? point : null;
+  };
+
   const updateLabels = (lambda, phi) => {
+    icons.forEach((icon) => {
+      const point = visiblePoint(icon.lonlat, lambda, phi);
+      if (point) {
+        icon.el.setAttribute("x", point[0]);
+        icon.el.setAttribute("y", point[1]);
+      }
+      icon.el.style.display = point ? "" : "none";
+    });
+
     const placed = [];
     labels.forEach((label) => {
-      // Hide tags on the far side of the view (with a margin, so none
-      // dangle right on the edge of the disc).
-      const onBack = d3.geoDistance(label.lonlat, [-lambda, -phi]) > 1.45;
-      const point = onBack ? null : projection(label.lonlat);
-      let visible =
-        Boolean(point) &&
-        Number.isFinite(point[0]) &&
-        Number.isFinite(point[1]) &&
-        point[0] > -40 &&
-        point[0] < WIDTH + 40 &&
-        point[1] > 0 &&
-        point[1] < HEIGHT;
+      const point = visiblePoint(label.lonlat, lambda, phi);
+      let visible = Boolean(point);
       if (visible) {
         // Tags that would run off the right edge flip to the left of their
-        // dot; a tag that would overlap an already-placed one stays hidden.
-        const flip = point[0] + 8 + label.width > WIDTH - 8;
+        // marker; a tag that would overlap an already-placed one stays hidden.
+        const flip = point[0] + label.gap + label.width > WIDTH - 8;
         const box = {
-          x: flip ? point[0] - 8 - label.width : point[0] + 8,
+          x: flip ? point[0] - label.gap - label.width : point[0] + label.gap,
           y: point[1] - LABEL_H * 0.75,
           w: label.width,
           h: LABEL_H
@@ -164,7 +202,7 @@
           visible = false;
         } else {
           placed.push(box);
-          label.el.setAttribute("x", flip ? point[0] - 8 : point[0] + 8);
+          label.el.setAttribute("x", flip ? point[0] - label.gap : point[0] + label.gap);
           label.el.setAttribute("y", point[1] + 4);
           label.el.setAttribute("text-anchor", flip ? "end" : "start");
         }
