@@ -39,15 +39,6 @@
   // the whole viewport before the fade.
   const WIDTH = 800;
   const HEIGHT = Math.round(WIDTH * (window.innerHeight / Math.max(1, window.innerWidth)));
-  const SPIN_MS = 5000; // globe drifts toward home
-  const GLOBE_ZOOM_MS = 2000; // still a globe: dive right down to home
-  const UNROLL_MS = 900; // flattens under you, holding position over home
-  const FADE_MS = 650; // keep in sync with the .globe-intro CSS transition
-  const START_TILT = -14; // slight downward tilt while in globe form
-  // Whole-globe radius, sized to the screen's shape: tall phone screens are
-  // width-limited, wide desktop screens height-limited.
-  const START_SCALE = Math.round(Math.min(0.3 * HEIGHT, 0.42 * WIDTH));
-  const ZOOM_SCALE = 1800; // how close the dive gets before flattening
   // On phones the 800-unit viewBox maps to a narrow screen, halving the
   // rendered size of everything; dots and labels compensate (the label
   // font itself is bumped in style.css, so the overlap-check numbers here
@@ -56,6 +47,30 @@
   const DOT_RADIUS = SMALL_SCREEN ? 6.5 : 3.2;
   const LABEL_CHAR_W = SMALL_SCREEN ? 12 : 6.5;
   const LABEL_H = SMALL_SCREEN ? 28 : 16;
+
+  const SPIN_MS = 5000; // globe drifts toward home
+  const DIVE_MS = 2000; // still a globe: dive down toward home
+  const UNROLL_MS = 900; // flattens under you — the zoom carries on through it
+  const FADE_MS = 650; // keep in sync with the .globe-intro CSS transition
+  const START_TILT = -14; // slight downward tilt while in globe form
+
+  // Whole-globe radius, sized to the screen's shape: tall phone screens are
+  // width-limited, wide desktop screens height-limited. Phones start closer
+  // in, so the globe isn't a small disc adrift in a tall window.
+  const START_SCALE = Math.round(
+    Math.min((SMALL_SCREEN ? 0.345 : 0.3) * HEIGHT, (SMALL_SCREEN ? 0.475 : 0.42) * WIDTH)
+  );
+
+  // Where the zoom finishes: the scale at which this drawing frames the same
+  // sweep of longitude the Leaflet map opens with, so the crossfade lands on
+  // a matching view. MAP_ZOOM mirrors the setView() zoom in app.js. The cap
+  // stops very narrow windows from diving so far that the world-110m
+  // outlines — which are coarse — turn into visible straight lines.
+  const MAP_ZOOM = 8;
+  const MAX_SCALE = 7000;
+  const MAP_SCALE =
+    (WIDTH * 256 * Math.pow(2, MAP_ZOOM)) / (2 * Math.PI * Math.max(1, window.innerWidth));
+  const END_SCALE = Math.round(Math.min(MAP_SCALE, MAX_SCALE));
 
   const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
 
@@ -244,6 +259,7 @@
     setTimeout(removeIntro, FADE_MS + 60);
   };
 
+  const TOTAL_MS = SPIN_MS + DIVE_MS + UNROLL_MS;
   const start = performance.now();
   const frame = (now) => {
     try {
@@ -253,27 +269,21 @@
         // rotation speed the shorter spin had.
         const t = elapsed / SPIN_MS;
         render(0, -homeLng - 60 * (1 - t), START_TILT, START_SCALE);
-      } else if (elapsed < SPIN_MS + GLOBE_ZOOM_MS) {
-        // Still a globe: dive right down to home, tilting so home sits
-        // centred. Exponential scale keeps the deep zoom feeling steady.
-        const t = (elapsed - SPIN_MS) / GLOBE_ZOOM_MS;
-        const eased = easeInOut(t);
-        render(
-          0,
-          -homeLng,
-          START_TILT + (-homeLat - START_TILT) * eased,
-          START_SCALE * Math.pow(ZOOM_SCALE / START_SCALE, eased)
-        );
-      } else if (elapsed < SPIN_MS + GLOBE_ZOOM_MS + UNROLL_MS) {
-        // The globe flattens into the map underneath you: same zoom, same
-        // spot over home, only the curvature eases away. The fade begins
-        // partway through, so the flattening dissolves straight into the
-        // real map with no pause.
-        const t = (elapsed - SPIN_MS - GLOBE_ZOOM_MS) / UNROLL_MS;
-        render(Math.sqrt(easeInOut(t)), -homeLng, -homeLat, ZOOM_SCALE);
-        if (t >= 0.4) finish();
+      } else if (elapsed < TOTAL_MS) {
+        // One unbroken push from the whole globe down to the map's own
+        // zoom. The flattening happens over the tail of that push rather
+        // than after it, so the zoom never stalls between the two.
+        const z = easeInOut((elapsed - SPIN_MS) / (DIVE_MS + UNROLL_MS));
+        const scale = START_SCALE * Math.pow(END_SCALE / START_SCALE, z);
+        // Tilt finishes bringing home to the centre as the flattening starts.
+        const tilt = START_TILT + (-homeLat - START_TILT) * easeInOut(Math.min(1, (elapsed - SPIN_MS) / DIVE_MS));
+        // Curvature only eases away over the last stretch; the fade begins
+        // partway through that, dissolving straight into the real map.
+        const f = Math.max(0, elapsed - SPIN_MS - DIVE_MS) / UNROLL_MS;
+        render(Math.sqrt(easeInOut(f)), -homeLng, tilt, scale);
+        if (f >= 0.4) finish();
       } else {
-        render(1, -homeLng, -homeLat, ZOOM_SCALE);
+        render(1, -homeLng, -homeLat, END_SCALE);
         finish();
         return;
       }

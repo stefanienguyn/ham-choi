@@ -84,3 +84,28 @@ geometry are enlarged to compensate for the viewBox-to-screen scale.
 Icon markers: places with an `icon` in data.js (Home's scooter) draw that
 emoji on the globe instead of a dot, matching the main map's markers; their
 name tag sits a little further out to clear the wider emoji.
+
+Smoothness + zoom depth round. The zoom used to finish before the flatten
+began and then sit frozen for 0.9s — that stall was what read as "not
+smooth". Now the dive and the flatten share ONE continuous eased zoom
+(`START_SCALE` → `END_SCALE` over DIVE_MS + UNROLL_MS), with the curvature
+easing away over its tail and the fade starting inside that. `END_SCALE` is
+now derived rather than guessed: the scale at which the drawing frames the
+same span of longitude Leaflet opens with (MAP_ZOOM 8, mirroring app.js
+setView), so the crossfade lands on a matching view — capped at 7000 so a
+narrow window can't dive far enough to expose the coarse world-110m
+outlines as straight lines. Phones also start closer in (globe fills ~95%
+of the width instead of ~84%) and, being narrow, end deeper.
+
+---
+
+# Google Analytics
+
+Added the gtag.js snippet (measurement ID G-5KF8B8BS0E) to the `<head>` of
+`index.html` and `about.html`, after the favicon and before the stylesheets
+— so the Leaflet-CSS-before-style.css rule is untouched. Deliberately NOT
+in `admin.html`: it is private, gitignored, and never deployed.
+
+Verified both pages open with no console errors, `gtag` defined, dataLayer
+populated, map still rendering all 25 markers, globe intro still completing
+and removing itself.
