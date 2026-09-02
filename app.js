@@ -2,10 +2,18 @@
  * Ham Chơi map logic.
  *
  * The two tile URLs are intentionally kept here, near the top, so they are
- * easy to change later. They do not require an API key.
+ * easy to change later.
  */
-const LIGHT_TILES = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png";
-const DARK_TILES = "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png";
+
+// CARTO now stamps "API KEY REQUIRED" across its basemap tiles unless a key
+// is supplied. A key is free (5 million tiles a month, no account needed):
+// get one at https://carto.com/basemaps/apikey and paste it between the
+// quotes below. Leave it empty and the map still works — just watermarked.
+const CARTO_API_KEY = "cb1_2rl8_1_400db634776b34450cd3fafc";
+
+const CARTO_KEY_SUFFIX = CARTO_API_KEY ? `?key=${CARTO_API_KEY}` : "";
+const LIGHT_TILES = `https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png${CARTO_KEY_SUFFIX}`;
+const DARK_TILES = `https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png${CARTO_KEY_SUFFIX}`;
 const TILE_OPTIONS = {
   attribution: "&copy; OpenStreetMap contributors, &copy; CARTO",
   maxZoom: 19,

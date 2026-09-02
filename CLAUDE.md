@@ -97,6 +97,9 @@ the fix.
    The labelled versions show raw multilingual OpenStreetMap names like
    "AMÉRICA DO SUL;AMÉRICA DEL SUR". Raster tiles cannot have their label
    language changed. Do not switch back to `light_all` / `dark_all`.
+   CARTO now stamps "API KEY REQUIRED" across the tiles unless the free
+   `CARTO_API_KEY` at the top of `app.js` is filled in. It is a public
+   client-side key, not a secret — the browser sends it with every tile.
 
 7. **Light mode is the default.** Do not read `prefers-color-scheme`. The
    manual toggle switches to dark for the current visit only, unpersisted.
