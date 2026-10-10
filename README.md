@@ -1,4 +1,4 @@
-# Ham Chơi 🛵
+# Ham Chơi <img src="favicon.png" alt="" width="36" align="top">
 
 A personal travel photo map — *a documentary of a "ham chơi" kid*.
 
