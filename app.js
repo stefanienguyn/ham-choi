@@ -21,6 +21,9 @@ const TILE_OPTIONS = {
   subdomains: "abcd"
 };
 
+// Zoom level the map opens at; picture icons are full size here.
+const START_ZOOM = 8;
+
 const map = L.map("map", {
   // Latitude-only bounds preserve the horizontal repetition of the world.
   maxBounds: [[-85, -Infinity], [85, Infinity]],
@@ -28,7 +31,7 @@ const map = L.map("map", {
   minZoom: 2,
   worldCopyJump: true,
   zoomControl: false
-}).setView([10.7737, 106.7166], 8);
+}).setView([10.7737, 106.7166], START_ZOOM);
 
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
@@ -39,6 +42,16 @@ let startBubble = null;
 let activePlace = null;
 let activePhotos = [];
 let activePhotoIndex = 0;
+
+// A place.icon that ends in an image extension is drawn as a picture;
+// anything else is treated as an emoji.
+const IMAGE_ICON = /\.(png|jpe?g|gif|svg|webp)$/i;
+// Marker box size in pixels: emoji icons, and picture icons (drawn larger
+// so the artwork reads at the default zoom).
+const EMOJI_ICON_SIZE = 34;
+const IMAGE_ICON_SIZE = 48;
+// Picture markers, rescaled by scaleImageIcons() as the map zooms.
+const imageMarkers = [];
 
 const markerLayers = [];
 const placePanel = document.querySelector(".place-panel");
@@ -381,17 +394,21 @@ function addMarkers() {
       weight: 0
     }).addTo(map);
 
-    // An optional place.icon (an emoji in data.js) replaces the dot for
-    // special places. The hover scale must target the inner span: Leaflet
-    // positions the outer element with its own transform, and scaling that
-    // would send the icon flying, like the old SVG-dot bug.
+    // An optional place.icon (an emoji or image path in data.js) replaces
+    // the dot for special places. The hover scale must target the inner
+    // element: Leaflet positions the outer element with its own transform,
+    // and scaling that would send the icon flying, like the old SVG-dot bug.
+    const isImageIcon = IMAGE_ICON.test(place.icon);
+    const iconSize = isImageIcon ? IMAGE_ICON_SIZE : EMOJI_ICON_SIZE;
     const dot = place.icon
       ? L.marker(place.coords, {
           icon: L.divIcon({
             className: "travel-marker-icon",
-            html: `<span>${escapeHtml(place.icon)}</span>`,
-            iconAnchor: [17, 17],
-            iconSize: [34, 34]
+            html: isImageIcon
+              ? `<img src="${escapeHtml(place.icon)}" alt="">`
+              : `<span>${escapeHtml(place.icon)}</span>`,
+            iconAnchor: [iconSize / 2, iconSize / 2],
+            iconSize: [iconSize, iconSize]
           }),
           interactive: false,
           keyboard: false
@@ -414,6 +431,7 @@ function addMarkers() {
       openPanel(place, index, hoverTarget);
     });
     markerLayers[index] = { target: hoverTarget, dot };
+    if (isImageIcon) imageMarkers.push(dot);
   });
 }
 
@@ -510,13 +528,27 @@ swapTileLayer();
 addMarkers();
 renderRecent();
 
+/**
+ * Shrink picture icons as the map zooms out (and grow them a little zooming
+ * in) so Home doesn't dwarf the plain dots from far away. Sets a CSS
+ * variable that style.css applies as a transform on the picture.
+ * Inputs: the map's current zoom. Output: none.
+ */
+function scaleImageIcons() {
+  const raw = Math.pow(2, (map.getZoom() - START_ZOOM) / 2);
+  const scale = Math.min(1.25, Math.max(0.5, raw));
+  imageMarkers.forEach((marker) => marker.getElement()?.style.setProperty("--zoom-scale", scale));
+}
+scaleImageIcons();
+map.on("zoom", scaleImageIcons);
+
 // A "click to start" bubble over Home (or the first place) until the
 // first panel is opened.
 const startPlaceIndex = Math.max(0, places.findIndex((place) => place.icon));
 if (markerLayers[startPlaceIndex]) {
   // The bob animation lives on the inner span: Leaflet positions the
   // tooltip itself with a transform, which an animation would fight.
-  startBubble = L.tooltip({ className: "start-bubble", direction: "top", offset: [0, -6], permanent: true })
+  startBubble = L.tooltip({ className: "start-bubble", direction: "top", offset: [0, -11], permanent: true })
     .setLatLng(markerLayers[startPlaceIndex].target.getLatLng())
     .setContent("<span>click here to start</span>")
     .addTo(map);

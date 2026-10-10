@@ -109,3 +109,23 @@ in `admin.html`: it is private, gitignored, and never deployed.
 Verified both pages open with no console errors, `gtag` defined, dataLayer
 populated, map still rendering all 25 markers, globe intro still completing
 and removing itself.
+
+# Favicon and Home marker (2026-10-10)
+
+## Review
+
+- `favicon.png` (project root) is the new site icon; both pages link it on
+  line 8. The friend's artwork arrived as a JPEG with a white background, so
+  it was cropped square, the border-connected white made transparent, and
+  saved as a real 256px PNG.
+- `data.js`: Home's `icon` is now `"favicon.png"`. An icon ending in an
+  image extension is drawn as a picture; anything else is still an emoji.
+- `app.js` / `style.css`: image icons render as a 48px `<img>` (emoji stay 34px) inside the
+  existing marker div, with the same hover grow as the emoji. The "click
+  here to start" bubble sits a little higher to clear the taller picture.
+- `globe-intro.js`: image icons become an SVG `<image>` centred on the spot.
+- Verified with headless-Chrome screenshots of the globe and the map.
+- Picture icons scale with the map zoom (`scaleImageIcons` in `app.js` sets
+  a `--zoom-scale` CSS variable): full size at the opening zoom, half size
+  two levels out, clamped to 0.5–1.25 so it never vanishes or balloons.
+  Checked in Chrome at zoom 2, 5 and 10.

@@ -467,8 +467,8 @@ button {
   box-shadow: 0 0 0 5px rgba(239, 105, 79, 0.24), 0 3px 10px rgba(21, 37, 37, 0.3);
 }
 
-/* Emoji markers (place.icon in data.js). The outer div is positioned by
-   Leaflet, so hover scaling happens on the inner span only. */
+/* Emoji or image markers (place.icon in data.js). The outer div is
+   positioned by Leaflet, so hover scaling happens on the inner element only. */
 .travel-marker-icon {
   align-items: center;
   display: flex;
@@ -479,13 +479,27 @@ button {
   text-shadow: 0 2px 8px rgba(21, 37, 37, 0.24);
 }
 
-.travel-marker-icon span {
+.travel-marker-icon span,
+.travel-marker-icon img {
   display: block;
   transition: transform 180ms ease;
 }
 
+/* --zoom-scale is set by app.js as the map zooms, so the picture follows
+   the zoom instead of staying one size like the dots. */
+.travel-marker-icon img {
+  filter: drop-shadow(0 2px 4px rgba(21, 37, 37, 0.24));
+  height: 100%;
+  transform: scale(var(--zoom-scale, 1));
+  width: 100%;
+}
+
 .travel-marker-icon.is-hovered span {
   transform: scale(1.28);
+}
+
+.travel-marker-icon.is-hovered img {
+  transform: scale(calc(var(--zoom-scale, 1) * 1.28));
 }
 
 .leaflet-tooltip.start-bubble {

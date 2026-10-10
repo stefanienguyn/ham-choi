@@ -137,18 +137,29 @@
   const SVG_NS = "http://www.w3.org/2000/svg";
   const ICON_SIZE = SMALL_SCREEN ? 26 : 14;
 
-  // Emoji markers for icon places, centred on their spot.
+  // Markers for icon places, centred on their spot. An icon ending in an
+  // image extension is drawn as a picture; anything else as emoji text.
+  // Text is centred by its own attributes; an image is centred by shifting
+  // its top-left corner back by half its size.
+  const IMAGE_ICON = /\.(png|jpe?g|gif|svg|webp)$/i;
   const icons = validPlaces
     .filter((place) => place.icon)
     .map((place) => {
-      const el = document.createElementNS(SVG_NS, "text");
+      const isImage = IMAGE_ICON.test(place.icon);
+      const el = document.createElementNS(SVG_NS, isImage ? "image" : "text");
       el.setAttribute("class", "globe-icon");
-      el.setAttribute("font-size", ICON_SIZE);
-      el.setAttribute("text-anchor", "middle");
-      el.setAttribute("dominant-baseline", "central");
-      el.textContent = place.icon;
+      if (isImage) {
+        el.setAttribute("href", place.icon);
+        el.setAttribute("width", ICON_SIZE);
+        el.setAttribute("height", ICON_SIZE);
+      } else {
+        el.setAttribute("font-size", ICON_SIZE);
+        el.setAttribute("text-anchor", "middle");
+        el.setAttribute("dominant-baseline", "central");
+        el.textContent = place.icon;
+      }
       svg.append(el);
-      return { el, lonlat: lonlatOf(place) };
+      return { el, lonlat: lonlatOf(place), offset: isImage ? ICON_SIZE / 2 : 0 };
     });
 
   // One name tag per place, positioned every frame next to its marker.
@@ -190,8 +201,8 @@
     icons.forEach((icon) => {
       const point = visiblePoint(icon.lonlat, lambda, phi);
       if (point) {
-        icon.el.setAttribute("x", point[0]);
-        icon.el.setAttribute("y", point[1]);
+        icon.el.setAttribute("x", point[0] - icon.offset);
+        icon.el.setAttribute("y", point[1] - icon.offset);
       }
       icon.el.style.display = point ? "" : "none";
     });

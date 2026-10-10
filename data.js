@@ -6,8 +6,8 @@
  * date, photos keep the order they are listed here — rearrange these lines
  * to rearrange them. Dates use YYYY-MM-DD.
  *
- * A place can also have an optional icon, an emoji shown instead of
- * the usual dot:  icon: "🛵"
+ * A place can also have an optional icon shown instead of the usual dot:
+ * an emoji (icon: "🛵") or an image file (icon: "favicon.png").
  *
  * A photo can also have an optional note — longer writing that opens
  * on its own full-window reading page. Wrap it in backticks (`)
@@ -35,7 +35,7 @@ const places = [
   },
   {
     name: "Home",
-    icon: "🛵",
+    icon: "favicon.png",
     coords: [10.7737261, 106.7166008],
     photos: [
       { src: "photos/home-2026-06-15-02.jpg", date: "2026-06-15", caption: "", spot: [10.7737261, 106.7166008] },
