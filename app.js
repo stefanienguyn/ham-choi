@@ -478,22 +478,17 @@ function renderRecent() {
   const recentCard = document.querySelector(".recent-card");
   const recentList = document.querySelector("#recent-list");
 
-  // Places ranked by their most recent upload. A photo's "added" date
-  // (stamped by the editor on export) wins; older entries without one fall
-  // back to the date the photo was taken. Within that newest upload, the
-  // photo shown is the one taken most recently.
-  const addedOn = (photo) => photo.added || photo.date || "";
+  // The latest photo date per place, newest places first.
   const latest = places
     .map((place, placeIndex) => {
-      const photos = (Array.isArray(place.photos) ? place.photos : []).filter(addedOn);
-      const added = photos.map(addedOn).sort().pop() || "";
-      const photo = photos
-        .filter((candidate) => addedOn(candidate) === added)
-        .sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
-      return { place, placeIndex, photo, added, date: photo?.date || "" };
+      const dates = (Array.isArray(place.photos) ? place.photos : [])
+        .map((photo) => photo.date)
+        .filter(Boolean)
+        .sort();
+      return { place, placeIndex, date: dates[dates.length - 1] || "", photo: null };
     })
-    .filter((entry) => entry.photo)
-    .sort((a, b) => b.added.localeCompare(a.added))
+    .filter((entry) => entry.date)
+    .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 3);
 
   if (!latest.length) {
@@ -502,7 +497,7 @@ function renderRecent() {
   }
 
   latest.forEach((entry) => {
-    const newestPhoto = entry.photo;
+    const newestPhoto = entry.place.photos.find((photo) => photo.date === entry.date);
     const item = document.createElement("button");
     item.type = "button";
     item.className = "recent-item";

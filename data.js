@@ -9,10 +9,6 @@
  * A place can also have an optional icon shown instead of the usual dot:
  * an emoji (icon: "🛵") or an image file (icon: "favicon.png").
  *
- * A photo can have an optional added date (YYYY-MM-DD) — the day it was
- * put on the map. The "Recently" box ranks places by it; the editor fills
- * it in automatically on export.
- *
  * A photo can also have an optional note — longer writing that opens
  * on its own full-window reading page. Wrap it in backticks (`)
  * instead of quotes; a blank line starts a new paragraph.
@@ -22,32 +18,32 @@ const places = [
     name: "Claremont, CA",
     coords: [34.0966764, -117.7197785],
     photos: [
-      { src: "photos/claremont-ca-2026-09-29-05.jpg", date: "2026-09-29", added: "2026-11-01", caption: "W banana bread", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-06.jpg", date: "2026-09-29", added: "2026-11-01", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-07.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-01.jpg", date: "2026-09-29", added: "2026-11-01", caption: "happy bday ziqie!", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-02.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-03.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-29-04.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-04-01.jpg", date: "2026-10-04", added: "2026-11-01", caption: "mochi ice cream?", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-04-02.jpg", date: "2026-10-04", added: "2026-11-01", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-04-03.jpg", date: "2026-10-04", added: "2026-11-01", caption: "so cute", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-01.jpg", date: "2026-10-08", added: "2026-11-01", caption: "aamp snack!", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-02.jpg", date: "2026-10-08", added: "2026-11-01", caption: "yay spam musubi", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-03.jpg", date: "2026-10-08", added: "2026-11-01", caption: "mentor and mentee bonding ", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-04.jpg", date: "2026-10-08", added: "2026-11-01", caption: "broseph is not vegan anymore", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-05.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-06.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-08-07.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-10-01.jpg", date: "2026-10-10", added: "2026-10-31", caption: "was doing thanksgiving gifts for my friends", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-10-10-02.jpg", date: "2026-10-10", added: "2026-10-31", caption: "idk when i'll be back in this lab again :(", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-13-01.jpg", date: "2026-09-13", added: "2026-10-31", caption: "we lowk burnt the cheese cake...", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-12-01.jpg", date: "2026-09-12", added: "2026-10-31", caption: "hi yuhang", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-12-02.jpg", date: "2026-09-12", added: "2026-10-31", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-12-03.jpg", date: "2026-09-12", added: "2026-10-31", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-12-04.jpg", date: "2026-09-12", added: "2026-10-31", caption: "", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-20-01.jpg", date: "2026-09-20", added: "2026-10-31", caption: "not broseph and his tatoo again...", spot: [34.0966764, -117.7197785] },
-      { src: "photos/claremont-ca-2026-09-20-02.jpg", date: "2026-09-20", added: "2026-10-31", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-05.jpg", date: "2026-09-29", caption: "W banana bread", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-06.jpg", date: "2026-09-29", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-07.jpg", date: "2026-09-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-01.jpg", date: "2026-09-29", caption: "happy bday ziqie!", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-02.jpg", date: "2026-09-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-03.jpg", date: "2026-09-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-04.jpg", date: "2026-09-29", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-01.jpg", date: "2026-10-04", caption: "mochi ice cream?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-02.jpg", date: "2026-10-04", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-03.jpg", date: "2026-10-04", caption: "so cute", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-01.jpg", date: "2026-10-08", caption: "aamp snack!", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-02.jpg", date: "2026-10-08", caption: "yay spam musubi", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-03.jpg", date: "2026-10-08", caption: "mentor and mentee bonding ", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-04.jpg", date: "2026-10-08", caption: "broseph is not vegan anymore", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-05.jpg", date: "2026-10-08", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-06.jpg", date: "2026-10-08", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-07.jpg", date: "2026-10-08", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-10-01.jpg", date: "2026-10-10", caption: "was doing thanksgiving gifts for my friends", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-10-02.jpg", date: "2026-10-10", caption: "idk when i'll be back in this lab again :(", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-13-01.jpg", date: "2026-09-13", caption: "we lowk burnt the cheese cake...", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-12-01.jpg", date: "2026-09-12", caption: "hi yuhang", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-12-02.jpg", date: "2026-09-12", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-12-03.jpg", date: "2026-09-12", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-12-04.jpg", date: "2026-09-12", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-20-01.jpg", date: "2026-09-20", caption: "not broseph and his tatoo again...", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-20-02.jpg", date: "2026-09-20", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-08-10-01.jpg", date: "2026-08-10", caption: "In n Out", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-08-10-02.jpg", date: "2026-08-10", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-08-10-03.jpg", date: "2026-08-10", caption: "", spot: [34.0966764, -117.7197785] },
@@ -83,35 +79,35 @@ const places = [
     name: "Atlanta, GA",
     coords: [33.7544657, -84.3898151],
     photos: [
-      { src: "photos/atlanta-ga-2026-09-19-01.jpg", date: "2026-09-19", added: "2026-11-01", caption: "interesting coca cola tasting", spot: [33.7544657, -84.3898151] },
-      { src: "photos/atlanta-2026-09-19-01.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
-      { src: "photos/atlanta-2026-09-19-02.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
-      { src: "photos/atlanta-2026-09-19-03.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] }
+      { src: "photos/atlanta-ga-2026-09-19-01.jpg", date: "2026-09-19", caption: "interesting coca cola tasting", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-01.jpg", date: "2026-09-19", caption: "", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-02.jpg", date: "2026-09-19", caption: "", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-03.jpg", date: "2026-09-19", caption: "", spot: [33.7544657, -84.3898151] }
     ]
   },
   {
     name: "Big Bear Lake, CA",
     coords: [34.2440587, -116.91018],
     photos: [
-      { src: "photos/big-bear-lake-ca-2026-10-19-01.jpg", date: "2026-10-19", added: "2026-11-01", caption: "fall break woo", spot: [34.2440587, -116.91018] },
-      { src: "photos/big-bear-lake-ca-2026-10-19-02.jpg", date: "2026-10-19", added: "2026-11-01", caption: "hi chef", spot: [34.2440587, -116.91018] },
-      { src: "photos/big-bear-lake-ca-2026-10-19-03.jpg", date: "2026-10-19", added: "2026-11-01", caption: "hi twin", spot: [34.2440587, -116.91018] },
-      { src: "photos/big-bear-lake-ca-2026-10-19-04.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] },
-      { src: "photos/big-bear-lake-ca-2026-10-19-05.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] },
-      { src: "photos/big-bear-lake-ca-2026-10-19-06.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] }
+      { src: "photos/big-bear-lake-ca-2026-10-19-01.jpg", date: "2026-10-19", caption: "fall break woo", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-02.jpg", date: "2026-10-19", caption: "hi chef", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-03.jpg", date: "2026-10-19", caption: "hi twin", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-04.jpg", date: "2026-10-19", caption: "", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-05.jpg", date: "2026-10-19", caption: "", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-06.jpg", date: "2026-10-19", caption: "", spot: [34.2440587, -116.91018] }
     ]
   },
   {
     name: "Laguna Beach, CA",
     coords: [33.5426975, -117.785366],
     photos: [
-      { src: "photos/laguna-beach-ca-2026-08-29-01.jpg", date: "2026-08-29", added: "2026-10-31", caption: "aamp outing!", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-02.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-03.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-04.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-05.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-06.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-07.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-01.jpg", date: "2026-08-29", caption: "aamp outing!", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-02.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-03.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-04.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-05.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-06.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-07.jpg", date: "2026-08-29", caption: "", spot: [33.5426975, -117.785366] },
       { src: "photos/laguna-beach-ca-2026-07-24-01.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] },
       { src: "photos/laguna-beach-ca-2026-07-24-02.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] }
     ]
