@@ -19,24 +19,11 @@
  */
 const places = [
   {
-    name: "Laguna Beach, CA",
-    coords: [33.5426975, -117.785366],
-    photos: [
-      { src: "photos/laguna-beach-ca-2026-08-29-01.jpg", date: "2026-08-29", added: "2026-10-31", caption: "aamp outing!", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-02.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-03.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-04.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-05.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-06.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-08-29-07.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-07-24-01.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] },
-      { src: "photos/laguna-beach-ca-2026-07-24-02.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] }
-    ]
-  },
-  {
     name: "Claremont, CA",
     coords: [34.0966764, -117.7197785],
     photos: [
+      { src: "photos/claremont-ca-2026-10-10-01.jpg", date: "2026-10-10", added: "2026-10-31", caption: "was doing thanksgiving gifts for my friends", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-10-02.jpg", date: "2026-10-10", added: "2026-10-31", caption: "idk when i'll be back in this lab again :(", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-09-13-01.jpg", date: "2026-09-13", added: "2026-10-31", caption: "we lowk burnt the cheese cake...", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-09-12-01.jpg", date: "2026-09-12", added: "2026-10-31", caption: "hi yuhang", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-09-12-02.jpg", date: "2026-09-12", added: "2026-10-31", caption: "", spot: [34.0966764, -117.7197785] },
@@ -73,6 +60,21 @@ const places = [
       { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+    ]
+  },
+  {
+    name: "Laguna Beach, CA",
+    coords: [33.5426975, -117.785366],
+    photos: [
+      { src: "photos/laguna-beach-ca-2026-08-29-01.jpg", date: "2026-08-29", added: "2026-10-31", caption: "aamp outing!", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-02.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-03.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-04.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-05.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-06.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-08-29-07.jpg", date: "2026-08-29", added: "2026-10-31", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-07-24-01.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] },
+      { src: "photos/laguna-beach-ca-2026-07-24-02.jpg", date: "2026-07-24", caption: "", spot: [33.5426975, -117.785366] }
     ]
   },
   {
