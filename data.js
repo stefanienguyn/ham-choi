@@ -22,6 +22,23 @@ const places = [
     name: "Claremont, CA",
     coords: [34.0966764, -117.7197785],
     photos: [
+      { src: "photos/claremont-ca-2026-09-29-05.jpg", date: "2026-09-29", added: "2026-11-01", caption: "W banana bread", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-06.jpg", date: "2026-09-29", added: "2026-11-01", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-07.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-01.jpg", date: "2026-09-29", added: "2026-11-01", caption: "happy bday ziqie!", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-02.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-03.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-09-29-04.jpg", date: "2026-09-29", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-01.jpg", date: "2026-10-04", added: "2026-11-01", caption: "mochi ice cream?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-02.jpg", date: "2026-10-04", added: "2026-11-01", caption: "wtf...?", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-04-03.jpg", date: "2026-10-04", added: "2026-11-01", caption: "so cute", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-01.jpg", date: "2026-10-08", added: "2026-11-01", caption: "aamp snack!", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-02.jpg", date: "2026-10-08", added: "2026-11-01", caption: "yay spam musubi", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-03.jpg", date: "2026-10-08", added: "2026-11-01", caption: "mentor and mentee bonding ", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-04.jpg", date: "2026-10-08", added: "2026-11-01", caption: "broseph is not vegan anymore", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-05.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-06.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
+      { src: "photos/claremont-ca-2026-10-08-07.jpg", date: "2026-10-08", added: "2026-11-01", caption: "", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-10-10-01.jpg", date: "2026-10-10", added: "2026-10-31", caption: "was doing thanksgiving gifts for my friends", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-10-10-02.jpg", date: "2026-10-10", added: "2026-10-31", caption: "idk when i'll be back in this lab again :(", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-09-13-01.jpg", date: "2026-09-13", added: "2026-10-31", caption: "we lowk burnt the cheese cake...", spot: [34.0966764, -117.7197785] },
@@ -60,6 +77,28 @@ const places = [
       { src: "photos/claremont-ca-2026-05-29-04.jpg", date: "2026-05-29", caption: "chirp chirp", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-05.jpg", date: "2026-05-29", caption: "Graduation", spot: [34.0966764, -117.7197785] },
       { src: "photos/claremont-ca-2026-05-29-06.jpg", date: "2026-05-29", caption: "", spot: [34.0966764, -117.7197785] }
+    ]
+  },
+  {
+    name: "Atlanta, GA",
+    coords: [33.7544657, -84.3898151],
+    photos: [
+      { src: "photos/atlanta-ga-2026-09-19-01.jpg", date: "2026-09-19", added: "2026-11-01", caption: "interesting coca cola tasting", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-01.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-02.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
+      { src: "photos/atlanta-2026-09-19-03.jpg", date: "2026-09-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] }
+    ]
+  },
+  {
+    name: "Big Bear Lake, CA",
+    coords: [34.2440587, -116.91018],
+    photos: [
+      { src: "photos/big-bear-lake-ca-2026-10-19-01.jpg", date: "2026-10-19", added: "2026-11-01", caption: "fall break woo", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-02.jpg", date: "2026-10-19", added: "2026-11-01", caption: "hi chef", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-03.jpg", date: "2026-10-19", added: "2026-11-01", caption: "hi twin", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-04.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-05.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] },
+      { src: "photos/big-bear-lake-ca-2026-10-19-06.jpg", date: "2026-10-19", added: "2026-11-01", caption: "", spot: [34.2440587, -116.91018] }
     ]
   },
   {
@@ -357,15 +396,6 @@ const places = [
       { src: "photos/boise-id-02.jpg", date: "2026-08-03", caption: "", spot: [43.9873519, -115.7390188] },
       { src: "photos/boise-id-03.jpg", date: "2026-08-03", caption: "", spot: [43.9873519, -115.7390188] },
       { src: "photos/boise-id-04.jpg", date: "2026-08-03", caption: "" }
-    ]
-  },
-  {
-    name: "Atlanta, GA",
-    coords: [33.7544657, -84.3898151],
-    photos: [
-      { src: "photos/atlanta-2026-06-19-01.jpg", date: "2026-06-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
-      { src: "photos/atlanta-2026-06-19-02.jpg", date: "2026-06-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] },
-      { src: "photos/atlanta-2026-06-19-03.jpg", date: "2026-06-19", added: "2026-10-31", caption: "", spot: [33.7544657, -84.3898151] }
     ]
   }
 ];
