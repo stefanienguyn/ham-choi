@@ -38,6 +38,8 @@ build tool, or a dependency manager, even if it would be cleaner.
   don't edit)
 - `photos/` — my images
 - `admin.html` — private local tool, gitignored, NEVER deployed
+- `sweep-dates.js` — run `node sweep-dates.js` after an upload to stamp
+  `added` on photos whose files aren't committed yet; never loaded by the site
 - `globe-to-map-transform/` — reference-only React component the globe intro
   was adapted from, gitignored, never deployed
 
@@ -60,7 +62,10 @@ const places = [
 ```
 
 Dates are `YYYY-MM-DD` strings so day rows sort newest-first with a plain
-string sort. The panel shows one horizontal photo row per date; within a
+string sort. A photo may also carry `added: "YYYY-MM-DD"`, the day it was
+put on the map; the "Recently" box ranks places by it (falling back to
+`date`), and `admin.html` stamps it on newly imported photos at export.
+The panel shows one horizontal photo row per date; within a
 date, photos keep their hand-arranged `data.js` order and must not be
 auto-sorted. Do not introduce Date objects for sorting.
 
